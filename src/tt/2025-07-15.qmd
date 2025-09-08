@@ -1,5 +1,75 @@
 ---
-title: "TidyTuesday Sample 2"
+title: "TT1"
 ---
 
 Add content here
+```{r}
+
+#The data set provided to us provides information about chess rankings in the month of september.
+#Within the data set, we have Sex, Nationality, Rating, Games, and Bday year. 
+#We also find the title that they may hold. This title depends on gender. There is also space for other titles. 
+#The research question that I have come up with is is there a relationship between your rating and the year within which you were born. 
+#How I am going to show this is with a bar graph, it will have the decade along the x axis and along the y axis, the count of the occurences of each title.
+# Install and load necessary libraries
+library(tidyverse)
+
+# Load the dataset
+
+fide_ratings <- read_csv("~/Documents/GitHub/portfolio-my-name-arch/data/raw/fide_ratings_september.csv")
+
+fide_ratings_clean <- fide_ratings %>%
+  drop_na(bday, rating) %>%
+  filter(bday != 0) %>%
+  mutate(decade = floor(bday / 10) * 10)
+
+
+
+average_rating_by_decade <- fide_ratings_clean %>%
+  group_by(decade) %>%
+  summarise(average_rating = mean(rating, na.rm = TRUE))
+
+ggplot(average_rating_by_decade, aes(x = factor(decade), y = average_rating)) +
+  geom_bar(stat = "identity", fill = "skyblue", width = 0.7) +
+  geom_text(aes(label = round(average_rating, 0)), vjust = -0.5) +
+  labs(
+    title = "Average Chess Rating by Birth Decade",
+    Subtitle="Stat 212 Amin Al Hashim",
+    x = "Decade",
+    y = "Average Rating",
+    caption = "Dooley Kim, 09-07-2025, Data source: fide_ratings_september.csv."
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = .5))
+
+top_titles <- fide_ratings_clean %>%
+  filter(title != "NA") %>%
+  count(title, sort = TRUE) %>%
+  top_n(5) %>%
+  pull(title)
+
+fide_top_titles <- fide_ratings_clean %>%
+  filter(title %in% top_titles)
+
+ggplot(fide_top_titles, aes(x = factor(decade), fill = title)) +
+  geom_bar(position = "dodge", width = .5) +
+  geom_text(
+    stat = "count",
+    aes(label = after_stat(count)),
+
+    position = position_dodge(width = .5),
+    vjust = -0.5,
+    size = 3
+  ) +
+  labs(
+    title = "Count of Top 5 Chess Titles by Birth Decade",
+    subtitle="Stat 212 Amin Al Hashim",
+    x = "Decade",
+    y = "Count of Titles",
+    fill = "Title",
+    caption = "Dooley Kim, 09-07-2025, Data source: fide_ratings_september.csv."
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = .5))
+
+```
+
