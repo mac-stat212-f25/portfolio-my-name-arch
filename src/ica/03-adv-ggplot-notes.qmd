@@ -63,14 +63,15 @@ Examine the [NYTimes 2015 Temperature Visualization (html)](https://www.nytimes.
 
 - Relate the intro paragraph: "Scientists declared that 2015 was Earth’s hottest year on record..." to the *design* of the visualization.  In particular, based on the intro paragraph,
   - What key message/claim does NYTimes want readers to be able to explore? 
-  They want the readers to explore the claim that 
+  They want the readers to explore the claim that it was hotter in 2015 than any years before
   - How did this goal inform what information is displayed in the visualization?
-
+This goal informs that by showing not only 2015 data, but also data from previous years.
 **Aesthetic Mapping** 
 
 - What specific variables (from the data codebook) underlie the visualization?
+Month, Day, Low/High, NormalLow/High, Record, RecordText, RecordLow/RecordHigh
 - How do these variables map to aesthetics of the visual elements, eg, position, size, shape, and color of glyphs?
-
+Month and day go along the x axis, 
 
 
 
