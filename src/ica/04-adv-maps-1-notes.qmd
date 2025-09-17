@@ -212,11 +212,21 @@ st_crs(mn_counties)
 - Install the `ggthemes` package, and add the following layer to use a clean map theme: `+ ggthemes::theme_map()`
 
 ```{r}
-ggplot(mn) +
-    geom_sf() +
-  geom_sf()
-    theme_classic() +
-    labs(title = "NAD27")
+library(ggthemes)
+ggplot() +
+  # First geom_sf() call: draw the county boundaries
+  geom_sf(data = mn_counties, fill = "#F5F5DC", color = "gray70", linewidth = 0.25) +
+  
+  # Second geom_sf() call: draw the city points on top
+  geom_sf(data = mn_cities, color = "#B22222", size = 3.5, shape = 18) +
+  # Apply the clean map theme
+  theme_map() +
+  
+  # Add titles
+  labs(title = "Major Cities and County Boundaries in Minnesota",
+       caption = "Data Source: U.S. Census Bureau")
+
+
 
 ```
 
@@ -239,7 +249,9 @@ ggplot() +
 Look up the `scale_color_viridis_c()` documentation via the [ggplot2 reference](https://ggplot2.tidyverse.org/reference/scale_viridis.html).
 
 - Read the function description at the top. What is the advantage of using this function for making color palettes?
+It improves accessibility for those who are colorblind
 - Look through the examples section. What is the difference between the `_d()`, `_c()`, and `_b()` variants of this function?
+I takes types of scale whether it's continuous, discrete, and binned
 
 
 
