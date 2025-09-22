@@ -117,9 +117,13 @@ Given that `\` is a special character, how can we put the `\` character in strin
 
 ```{r ex_create_string_slash}
 # Your code
+#string1 <- 'C:\Users'
+string2 <- 'C:\\Users'
+str_view(string2)
+
 ```
 
-
+If you fail to escape, you get an error
 Other special characters include:
 
 - `\t` (Creates a tab)
