@@ -44,6 +44,7 @@ book:
       - src/ica/ica-sample2.qmd
       - src/ica/cleaning.qmd
       - src/ica/03-adv-ggplot-notes.qmd
+      - src/ica/07-wrangling-2-notes.qmd
 
   appendices:
   - src/appx/appx-sample1.qmd

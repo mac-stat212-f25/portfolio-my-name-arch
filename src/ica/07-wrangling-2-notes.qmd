@@ -97,10 +97,12 @@ str_view(string3)
 
 ```{r ex_create_string}
 # Your code
+string1 <- "It's Thursday"
+
 
 ```
 
-
+It doesn't work with single quotes because it thinks it ends the string after It.
 Because `"` and `'` are special characters in the creation of strings, R offers another way to put them inside a string. We can **escape** these special characters by putting a `\` in front of them:
 
 ```{r escape_chars}
@@ -176,6 +178,12 @@ df_dates <- tibble(
 )
 
 
+df_dates |>
+    mutate(
+        full_name1 = str_c(month, " ",day, " ",year),
+        full_name2 = str_glue("{month} {day}{year}")
+    )
+
 ```
 
 
@@ -215,12 +223,21 @@ str_sub("a", start = 1, end = 15)
 **Exercise:** Using `str_sub()`, create a new variable with only the middle letter of each word in the data frame below. (Challenge: How would you handle words with an even number of letters?)
 
 ```{r ex_str_sub}
+library(tidyverse)
+
 df <- tibble(
-    word_id = 1:3,
-    word = c("replace", "match", "pattern")
+  word_id = 1:3,
+  word = c("replace", "match", "pattern")
 )
 
-
+# Create a new variable with the middle letter
+df %>%
+  mutate(
+    middle_letter = str_sub(word,
+      start = (str_length(word) + 1) / 2,
+      end = (str_length(word) + 1) / 2
+    )
+  )
 
 ```
 
@@ -284,6 +301,8 @@ str_view(words, "[^aeiou]y[^aeiou]")
 
 ```{r ex_regex_classes}
 # Your code
+str_view(words, "[aeiou][aeiou]m")
+
 
 ```
 
@@ -301,6 +320,7 @@ str_view(fruit, "apple|melon|nut")
 
 ```{r ex_regex_alternation}
 # Your code
+str_view(fruit, "aa|ee|ii|oo|uu")
 
 ```
 
@@ -315,6 +335,11 @@ str_view(fruit, "apple|melon|nut")
 
 ```{r ex_regex_start_end_group}
 # Your code
+# Match words that have vowel-x-vowel
+str_view(words, "^y")
+
+# Match words that have not_vowel-y-not_vowel
+str_view(words, "[^y]")
 
 
 ```
@@ -346,7 +371,23 @@ The following are core `stringr` functions that use regular expressions:
 **Exercise:** Starting from `str_count()`, explore each of these functions by pulling up the function documentation page and reading through the arguments. Try out each function using the `posts` data.
 
 ```{r}
+#str_count(posts, "yes")
+#str_detect(posts,"mom")
+#str_subset(posts,"Noah Kahan")
+#str_extract(posts,"mom")
+str_replace(posts,"R","r")
+str_remove(posts,"r )
+```
+**Exercise:** Using the `words` data, find (1) words that start with "y" and (2) words that don't start with "y".
 
+```{r ex_regex_start_end_group2}
+# Your code
+# Match words that have vowel-x-vowel
+str_view(words, "['^'y]")
+
+# Match words that have not_vowel-y-not_vowel
+str_view(words, "[^y]")
+)
 ```
 
 ## Done!

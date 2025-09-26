@@ -148,7 +148,17 @@ In your visualization, also display the usual temperatures (`NormalLow` and `Nor
 ![SFO observed, Average, and Record Daily Temperatures in 2011](https://hash-mac.github.io/stat212site-f25/images/sfo_second_graph.png)
 
 ```{r weather_plot_temp_all}
-
+ggplot(weather, aes(x = dateInYear)) +
+  # Layer 1: Record temperature range (light tan background)
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3", linewidth = 4) +
+  
+  # Layer 2: Normal temperature range (grayish middle layer)
+  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = "#C8B8BA", linewidth = 4) +
+  
+  # Layer 3: Actual 2011 temperature range (thin red foreground)
+  geom_linerange(aes(ymin = Low, ymax = High), color = "#A90248", linewidth = 1.5) +
+  
+  theme_classic()
 
 ```
 
@@ -163,7 +173,22 @@ If you'd like finer control of the width of these lines/rectangles, check out th
 Recreate the visual demarcations of the months by adding vertical lines separating the months.  Brainstorm how we might draw those vertical lines. What `geom` might we use?  What subset of the data might we use in that `geom` layer to draw lines only at the month divisions? 
 
 ```{r }
+# First, create a data frame with the end day of each month for the vertical lines
+month_boundaries <- weather %>%
+  group_by(Month) %>%
+  summarize(end_day = max(dateInYear), .groups = "drop")
 
+# Now, add the vertical lines to the plot from Exercise 3
+ggplot(weather, aes(x = dateInYear)) +
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3", linewidth = 4) +
+  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = "#C8B8BA", linewidth = 4) +
+  geom_linerange(aes(ymin = Low, ymax = High), color = "#A90248", linewidth = 1.5) +
+  
+  # Add vertical lines at the end of each month
+  # We use end_day + 0.5 to place the line between two days
+  geom_vline(data = month_boundaries, aes(xintercept = end_day + 0.5), color = "white", linewidth = 1) +
+  
+  theme_classic()
 
 ```
 
@@ -176,6 +201,47 @@ Change the x-axis labels so that the month names display in the center of each m
 ::: {.callout-tip title="Month Names"}
 R has built-in variables called `month.abb` and `month.name` that contain abbreviated and full month names.
 :::
+```{r}
+# Create a data frame for month boundaries (for the white vertical lines)
+month_boundaries <- weather %>%
+  group_by(Month) %>%
+  summarize(end_day = max(dateInYear), .groups = "drop")
+
+# Create a data frame for month midpoints (for the x-axis labels)
+month_midpoints <- weather %>%
+  group_by(Month) %>%
+  summarize(mid_day = mean(dateInYear), .groups = "drop")
+
+# Build the final combined plot
+ggplot(weather, aes(x = dateInYear)) +
+  # Layer 1: Record temperature range
+  geom_linerange(aes(ymin = RecordLow, ymax = RecordHigh), color = "#ECEBE3", linewidth = 4) +
+  
+  # Layer 2: Normal temperature range
+  geom_linerange(aes(ymin = NormalLow, ymax = NormalHigh), color = "#C8B8BA", linewidth = 4) +
+  
+  # Layer 3: Actual 2011 temperature range
+  geom_linerange(aes(ymin = Low, ymax = High), color = "#A90248", linewidth = 1.5) +
+  
+  # Add vertical lines to separate months
+  geom_vline(data = month_boundaries, aes(xintercept = end_day + 0.5), color = "white", linewidth = 1) +
+  
+  # Use scale_x_continuous to create custom month labels
+  scale_x_continuous(
+    name = NULL, # Remove axis title
+    breaks = month_midpoints$mid_day,
+    labels = month.abb,
+    expand = c(0.01, 0.01) 
+  ) +
+  
+  # Final theme adjustments
+  labs(y = "Temperature (°F)") +
+  theme_classic() +
+  theme(
+    axis.ticks.x = element_blank(), 
+    panel.grid = element_blank()    
+  )
+```
 
 
 Try to figuring out this new challenge using search engines and LLMs:
@@ -184,6 +250,7 @@ Try to figuring out this new challenge using search engines and LLMs:
 
 - **LLMs.** Use [ChatGPT](https://chat.openai.com/) or [Gemini](https://gemini.google.com/) with prompts that will most efficiently get you the desired results. Record the chat prompts used and output given. Evaluate the output. Do you fully understand the code generated? How can you tell that the generated code is correct?
 
+I first asked it to split Excersise 2 code by month, then asked to combine it into one graph
 
 ## Exercise 6 
 
@@ -197,7 +264,58 @@ Create a precipitation plot that looks like the following.  Note that
 
 
 ```{r weather_plot_precip}
+# --- Data Preparation ---
+# 1. Summarize data by month for labels, midpoints, and boundaries
+monthly_summary <- weather %>%
+  group_by(Month) %>%
+  summarize(
+    total_precip = sum(Precip),
+    mid_day = mean(dateInYear),
+    end_day = max(dateInYear),
+    .groups = "drop"
+  )
 
+# 2. Filter for days with record precipitation for the triangles
+record_precip_days <- weather %>%
+  filter(RecordP == TRUE)
+
+# --- Plot Creation ---
+ggplot(weather, aes(x = dateInYear)) +
+  # Layer 1: Record Precipitation (tan background bars)
+  geom_col(aes(y = RecordPrecip), fill = "#ebeae2", width = 1) +
+  
+  # Layer 2: Actual Precipitation (blue foreground bars)
+  geom_col(aes(y = Precip), fill = "#32a3d8", width = 1) +
+  
+  # Layer 3: Triangles for record days (shape = 17 is a solid triangle)
+  geom_point(data = record_precip_days, aes(y = RecordPrecip + 0.05), shape = 17, color = "#32a3d8", size = 2) +
+  
+  # Layer 4: Text for monthly totals
+  geom_text(data = monthly_summary, aes(x = mid_day, y = 1.6, label = round(total_precip, 1)), 
+            hjust = 0.5, vjust = 0, size = 3.5, color = "gray40") +
+  
+  # Layer 5: Month boundary lines
+  geom_vline(data = monthly_summary, aes(xintercept = end_day + 0.5), color = "white", linewidth = 1) +
+  
+  # --- Scales and Theming ---
+  scale_x_continuous(
+    name = NULL,
+    breaks = monthly_summary$mid_day,
+    labels = month.abb,
+    expand = c(0.01, 0.01)
+  ) +
+  
+  # Set y-limits to make space for text and remove padding
+  scale_y_continuous(limits = c(0, 1.8), expand = c(0, 0)) +
+  
+  labs(y = NULL, x = NULL) + # Remove axis titles
+  
+  # Start with a completely minimal theme
+  theme_void() + 
+  theme(
+    # Add back the x-axis text labels
+    axis.text.x = element_text(color = "gray40", margin = margin(t = 5)), 
+  )
 ```
 ## Done!
 

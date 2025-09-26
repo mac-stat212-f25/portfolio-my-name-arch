@@ -103,6 +103,7 @@ nc <- st_read(system.file("shape/nc.shp", package = "sf"))
 
 # Read in shapefiles just downloaded
 mn_cities <- st_read("~/Documents/GitHub/portfolio-my-name-arch/src/ica/metadata/city_and_township_population_centers.shp")
+library(sf)
 mn_water <- ("~/Documents/GitHub/portfolio-my-name-arch/src/ica/metadata/LakesAndRivers.shp")
 ```
 
@@ -281,7 +282,27 @@ Build on our existing map by adding a raster layer for elevation as the backgrou
 - Add in the layers from the map above to show the largest cities and the county outlines. To remove a background color, use `fill = NA`.
 
 ```{r}
-
+ggplot() +
+  # Layer 1: Elevation raster background
+  geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) +
+  
+  # Layer 2: County boundaries (transparent fill)
+  geom_sf(data = mn_counties, fill = NA, color = "gray50") +
+  
+  # Layer 3: City points, filtered for population >= 10,000
+  geom_sf(data = mn_cities |> filter(Population >= 10000), 
+          mapping = aes(color = Population, size = Population)) +
+          
+  # Custom color scales
+  scale_fill_gradient(low = "darkgreen", high = "white", name = "Elevation") +
+  scale_color_viridis_c(name = "City Population") +
+  
+  # Apply a clean map theme
+  ggthemes::theme_map() +
+  
+  # Add a title and adjust legend
+  labs(title = "Minnesota Cities (Pop. >= 10,000) by Elevation") +
+  theme(legend.position = "right")
 
 ```
 
@@ -295,17 +316,27 @@ Build on our existing map by adding a raster layer for elevation as the backgrou
 - We then use `st_crop()` to trim a spatial object to a given bounding box.
 
 ```{r get_elevation_data_zoom_in}
-seven_countyarea <- mn_counties |>
-    filter(name %in% c("Anoka", "Hennepin", "Ramsey", "Dakota", "Carver", "Washington", "Scott")) |> 
-    st_bbox()
-seven_countyarea
+# Define the file path for the output image
+output_path <- "figures/tc_map_zoom.png"
 
-elevation <- elevatr::get_elev_raster(mn_counties |> st_crop(seven_countyarea), z = 9, clip = "bbox")
-raster::crs(elevation) <- sf::st_crs(mn_counties)
+# Start the PNG graphics device
+png(output_path, width = 800, height = 800)
 
-# Convert to data frame for plotting
-elev_df <- elevation |> terra::as.data.frame(xy = TRUE)
-colnames(elev_df) <- c("x", "y", "elevation")
+# --- Code for creating the plot (from the prompt) ---
+ggplot() +
+    geom_raster(data = elev_df, aes(x = x, y = y, fill = elevation)) + 
+    geom_sf(data = mn_counties, fill = NA, color = "black") + # county boundary layer
+    geom_sf(data = mn_water, fill = "lightsteelblue1", color = "lightsteelblue1") + # river/lake layer
+    geom_sf(data = mn_cities |> filter(Population >= 10000), mapping = aes(color = Population, size = Population)) + # cities layer
+    scale_color_viridis_c(option = "magma") + # continuous (gradient) color scale
+    scale_fill_gradient(low = "darkgreen", high = "white") + # continuous (gradient) fill scale
+    coord_sf(xlim = seven_countyarea[c("xmin", "xmax")], ylim = seven_countyarea[c("ymin", "ymax")]) + # crop map
+    labs(title = "Twin Cities with Population >= 10,000") + 
+    ggthemes::theme_map() +
+    theme(legend.position = "none") # remove legend
+
+# Close the graphics device to save the file
+dev.off()
 ```
 
 In the plot below, we add a layer for water information and a `coord_sf()` layer to restrict the x and y-axis limits to the Twin Cities bounding box. (Without this layer, the map would zoom back out to show all counties and bodies of water).
