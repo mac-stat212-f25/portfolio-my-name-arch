@@ -1,0 +1,4 @@
+"0","data <- mtcars"
+"0","yvar <- ""mpg"""
+"0","preds <- c(""hp"", ""wt"")"
+"0","pred_of_interest <- ""hp"""

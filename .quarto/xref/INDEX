@@ -1,0 +1,62 @@
+{
+  "index.qmd": {
+    "index.html": "6ceaddf7"
+  },
+  "src/pv/pv-01.qmd": {
+    "pv-01.html": "0329c93b"
+  },
+  "src/tt/2025-07-08.qmd": {
+    "2025-07-08.html": "6b8e3179"
+  },
+  "src/tt/2025-07-15.qmd": {
+    "2025-07-15.html": "c9d6824f"
+  },
+  "src/ica/ica-sample1.qmd": {
+    "ica-sample1.html": "160e314d"
+  },
+  "src/ica/ica-sample2.qmd": {
+    "ica-sample2.html": "2bd3a1d2"
+  },
+  "src/appx/appx-sample1.qmd": {
+    "appx-sample1.html": "512ca6a7"
+  },
+  "src/appx/appx-sample2.qmd": {
+    "appx-sample2.html": "db54ba2d"
+  },
+  "mm/mm.md": {
+    "mm.html": "715db4cb"
+  },
+  "404.qmd": {
+    "404.html": "c363f4c5"
+  },
+  "src/ica/cleaning.qmd": {
+    "cleaning.html": "2f11dc71"
+  },
+  "src/tt/TT.qmd": {
+    "TT.html": "a836c01e"
+  },
+  "src/ica/03-adv-ggplot-notes.qmd": {
+    "03-adv-ggplot-notes.html": "a8581538"
+  },
+  "src/ica/07-wrangling-2-notes.qmd": {
+    "07-wrangling-2-notes.html": "13c0abc9"
+  },
+  "src/tt/hw04-tt.qmd": {
+    "hw04-tt.html": "2d9a8fac"
+  },
+  "src/ica/10-base-r-notes.qmd": {
+    "10-base-r-notes.html": "25e977ff"
+  },
+  "src/ica/09-functions-notes.qmd": {
+    "09-functions-notes.html": "c02e2011"
+  },
+  "src/ica/06-wrangling-1-notes.qmd": {
+    "06-wrangling-1-notes.html": "f2569f3e"
+  },
+  "src/ica/04-adv-maps-1-notes.qmd": {
+    "04-adv-maps-1-notes.html": "adb5b35f"
+  },
+  "src/tt/hw05-tt.qmd": {
+    "hw05-tt.html": "21477bbc"
+  }
+}

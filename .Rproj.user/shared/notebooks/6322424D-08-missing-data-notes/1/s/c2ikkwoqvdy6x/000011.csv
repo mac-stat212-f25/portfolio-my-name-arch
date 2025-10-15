@@ -1,0 +1,5 @@
+"0","ci_data <- bind_rows(ci_list)"
+"0","ci_data |> "
+"0","    mutate(contains_truth = ci_lower < 1 & ci_upper > 1) |> "
+"0","    group_by(which_imp) |> "
+"0","    summarize(frac_contains_truth = mean(contains_truth))"

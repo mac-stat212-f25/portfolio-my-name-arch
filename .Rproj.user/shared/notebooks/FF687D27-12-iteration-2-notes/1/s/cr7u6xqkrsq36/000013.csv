@@ -1,0 +1,5 @@
+"0","library(tidyverse)"
+"0","# Compile Results"
+"0","bind_rows(results1, results2, results3, results4) |>"
+"0","  mutate(type = c(""for_loop_no_storage"", ""for_loop_with_storage"", ""purrr_map"", ""standard_func"")) |>"
+"0","  select(type, mem_alloc, total_time)  |> print()"

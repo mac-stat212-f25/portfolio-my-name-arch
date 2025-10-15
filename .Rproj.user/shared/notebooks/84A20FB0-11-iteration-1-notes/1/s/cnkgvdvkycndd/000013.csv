@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0","# Example 3: Vectorized function"
+"0","#Notice median (time to run), mem_alloc (how much memory you are using), and gc (garbage collection)"
+"0","bench::mark("
+"0","  x <- seq(1, 1e5, by = 1)"
+"0",")"

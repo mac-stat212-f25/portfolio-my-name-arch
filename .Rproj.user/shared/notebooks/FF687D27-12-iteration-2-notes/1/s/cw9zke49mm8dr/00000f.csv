@@ -1,0 +1,8 @@
+"0","# plot for making a scatterplot"
+"0","carat_scatter <- function(df) {"
+"0","  ggplot(df, aes(x = carat, y = price)) + geom_point()  "
+"0","}"
+"0",""
+"0","# Create a ""variable"" with each plots"
+"0","by_clarity <- by_clarity |> "
+"0","  mutate(plot = map(data, carat_scatter)) # iterate over data to create ggplot output"

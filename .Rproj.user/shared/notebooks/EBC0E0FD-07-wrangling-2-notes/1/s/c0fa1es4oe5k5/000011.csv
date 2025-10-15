@@ -1,0 +1,12 @@
+"0","string1 <- ""Record temp:\t102"""
+"0","string2 <- ""Record temp:\n102"""
+"0",""
+"0","str_view(string1)"
+"1","[90m[1] │[39m Record temp:[36m{\t}[39m102"
+"1","
+"
+"0","str_view(string2)"
+"1","[90m[1] │[39m Record temp:
+    [90m│[39m 102"
+"1","
+"

@@ -1,0 +1,5 @@
+"0","# Let's create separate datasets within one tibble"
+"0","by_clarity <- diamonds |> "
+"0","  group_nest(clarity)"
+"0",""
+"0","by_clarity"

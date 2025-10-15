@@ -1,0 +1,6 @@
+"0","group_means(diamonds, group_var = ""cut"", mean_var = ""carat"")"
+"1","[1m[33mError[39m in `group_by()`:[22m
+[38;5;232m[33m![38;5;232m Must group by variables found in `.data`.
+[31m✖[38;5;232m Column `group_var` is not found.[39m
+[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
+"

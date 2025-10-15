@@ -1,0 +1,4 @@
+"0","dev.off()"
+"2","Error in dev.off() : 
+  QuartzBitmap_Output - unable to open file 'figures/tc_map_zoom.png'
+"

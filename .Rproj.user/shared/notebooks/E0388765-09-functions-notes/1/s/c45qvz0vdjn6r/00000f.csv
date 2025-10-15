@@ -1,0 +1,5 @@
+"0","group_means <- function(df, group_var, mean_var) {"
+"0","    df |>"
+"0","        group_by(group_var) |>"
+"0","        summarize(mean = mean(mean_var))"
+"0","}"

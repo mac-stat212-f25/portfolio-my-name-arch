@@ -1,0 +1,7 @@
+"0","# Example 1: No storage container; append new value to existing vector"
+"0","x <- integer()"
+"0","bench::mark("
+"0","  for (i in 1:1e5) {"
+"0","    x <- c(x, i)"
+"0","  }"
+"0",")"

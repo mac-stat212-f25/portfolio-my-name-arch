@@ -1,0 +1,17 @@
+{
+  "hash": "16d3b3c979617680f3cd794216fcafde",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Homework 04\"\n---\n\n\n\n\n## TidyTuesday Section (optional)\n\n::: {.callout-important title=\"Instructions\"}\n\nYou can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.\n\n:::\n\n\nExplore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ncranes <- read_csv(\"~/Documents/GitHub/portfolio-my-name-arch/src/tt/cranes.csv\")\ncrane_summary <- cranes %>%\n  mutate(observations = as.numeric(observations)) %>%\n  filter(comment != 'Record observation') %>%\n  group_by(comment) %>%\n  summarize(\n    avg_observations = mean(observations, na.rm = TRUE),\n    .groups = 'drop'\n  )\n\n\nprint(crane_summary)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 6 × 2\n  comment               avg_observations\n  <chr>                            <dbl>\n1 Bad weather                       NaN \n2 Canceled/No count                   0 \n3 First count of season            1114.\n4 Last count of season              518.\n5 Severe interference             15000 \n6 Uncertain count                 11712.\n```\n\n\n:::\n\n```{.r .cell-code}\nggplot(crane_summary, aes(x = comment, y = avg_observations, fill = comment)) +\n\n  geom_col(width = 0.6) +\n  geom_text(\n    # Label the bars with the rounded average value\n    aes(label = round(avg_observations, 0)),\n    vjust = -0.5, \n    size = 4\n  ) +\n  labs(\n    title = \"Average Observations by Comment Type\",\n    subtitle = \"Stat 212 Amin Al Hashim\",\n    x = \"Comment Type\",\n    y = \"Average Number of Observations\",\n    caption = \"Dooley Kim, 10-01-2025, Data source: cranes.csv.\"\n  ) +\n  theme_minimal() +\n  theme(\n    axis.text.x = element_text(angle = 45, hjust = 1),\n    legend.position = \"none\"\n  )\n```\n\n::: {.cell-output-display}\n![](hw04-tt_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\nThe question that I had was is there a relationship between crane observations and the comment on a day. I realized that there are certain comments that are left on days. So I was curious, whether these comments bear any effect on the amount observed. I did not include the record observations because I know that they will obviously have a higher average number of observations.\n\nSo what this graph shows me is that the days when there is severe interference or an uncertain amount, we can expect a very high count, but the ends of the season do not see that many observations on average. This makes a bit of sense because logically,because at the borders of the season, it is probably a lot futher from the peak of the season which I would expect to be in the middle of the season. I was a bit surprised at how high severe interference and uncertain amount are.\n",
+    "supporting": [
+      "hw04-tt_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

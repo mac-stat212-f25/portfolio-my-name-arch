@@ -1,0 +1,6 @@
+"0","add_mm <- function(x) {"
+"0","    str_c(x, "" mm"")"
+"0","}"
+"0",""
+"0","diamonds |> "
+"0","    mutate(across(.cols = c(x, y, z), .fns = add_mm))"

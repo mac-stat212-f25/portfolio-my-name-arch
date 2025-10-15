@@ -1,0 +1,6 @@
+"0","#3"
+"0","Good_Diamonds<-diamonds %>%"
+"0","  filter(cut %in% c('Ideal', 'Fair', 'Premium'))"
+"0","#4"
+"0","Good_Diamonds%>%"
+"0","  filter(cut=='Fair' & price>3000)"

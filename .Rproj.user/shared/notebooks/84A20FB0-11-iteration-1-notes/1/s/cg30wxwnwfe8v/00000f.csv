@@ -1,0 +1,6 @@
+"0","remove_outliers <- function(data, what_var, sd_thresh) {"
+"0","    data |> "
+"0","        mutate(zscore = ({{ what_var }} - mean({{ what_var }}, na.rm = TRUE))/sd({{ what_var }}, na.rm = TRUE)) |>"
+"0","        filter(zscore <= sd_thresh)"
+"0","}"
+"0",""

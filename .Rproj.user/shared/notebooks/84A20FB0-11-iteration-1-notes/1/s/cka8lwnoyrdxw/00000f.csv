@@ -1,0 +1,6 @@
+"0",""
+"0","df_arg_combos <- crossing("
+"0","    mod_formula = c(price ~ carat, price ~ carat + cut,  price ~ carat + cut + clarity,  price ~ carat + cut + clarity + color),"
+"0","    remove_outliers = c(TRUE, FALSE)"
+"0",")"
+"0","df_arg_combos"
