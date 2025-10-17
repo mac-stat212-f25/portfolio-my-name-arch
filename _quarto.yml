@@ -27,7 +27,6 @@ book:
 
   chapters:
     - text: "Welcome"
-      href: index.qmd
 
     - part: "Prof Viz"
       chapters:
