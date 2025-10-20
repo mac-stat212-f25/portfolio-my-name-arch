@@ -1,3 +1,0 @@
-"0","     weather_cleaned<-(weather)%>%"
-"0","       mutate(precipYr=na_if(PrecipYr,99999))%>%"
-"0","       mutate(dateInYear=1:365)"

@@ -26,37 +26,26 @@ book:
     search: true
 
   chapters:
-    - text: "Welcome"
-
-    - part: "Prof Viz"
-      chapters:
-      - src/pv/pv-01.qmd
-
+    # 💥 SOLUTION: This line is required to define the home page!
+    - index.qmd
+    
     - part: "TidyTuesday"
       chapters:
-      - src/tt/2025-07-08.qmd
-      - src/tt/2025-07-15.qmd
-      - src/tt/hw04-tt.qmd
-      - src/tt/hw05-tt.qmd
-
+      - src/tt/2025-07-08.html
+      - src/tt/2025-07-15.html
+      - src/tt/hw04-tt.html
+      - src/tt/hw05-tt.html
 
     - part: "In-Class Activities"
       chapters:
-      - src/ica/ica-sample1.qmd
-      - src/ica/ica-sample2.qmd
-      - src/ica/cleaning.qmd
       - src/ica/03-adv-ggplot-notes.qmd
       - src/ica/10-base-r-notes.qmd
       - src/ica/09-functions-notes.qmd
-      - src/ica/06-wrangling-1-notes.qmd
-      - src/ica/04-adv-maps-1-notes.qmd
+      - src/ica/06-wrangling-1-notes.html
+#      - src/ica/04-adv-maps-1-notes.qmd
       - src/ica/07-wrangling-2-notes.qmd
 
-
-
   appendices:
-  - src/appx/appx-sample1.qmd
-  - src/appx/appx-sample2.qmd
   - mm/mm.md
 
 format:

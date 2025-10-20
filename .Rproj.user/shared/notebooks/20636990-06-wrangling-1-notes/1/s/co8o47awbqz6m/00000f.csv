@@ -1,8 +1,0 @@
-"0","#| error: true"
-"0",""
-"0","fct(months2, levels = month.abb)"
-"1","[1m[33mError[39m in `fct()`:[22m
-[38;5;232m[33m![38;5;232m All values of `x` must appear in `levels` or `na`
-[36mℹ[38;5;232m Missing level: ""Jna""[39m
-[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
-"

@@ -1,3 +1,0 @@
-"0","library(tidyverse)"
-"0","weather=read.csv(""../../data/raw/weather.csv"")"
-"0","head(weather)"

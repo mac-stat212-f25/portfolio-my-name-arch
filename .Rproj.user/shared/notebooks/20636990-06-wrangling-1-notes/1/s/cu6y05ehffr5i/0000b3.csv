@@ -1,7 +1,0 @@
-"0","""yes"""
-"1","[1]"
-"1"," ""yes"""
-"1","
-"
-"0","Good_Diamonds%>%"
-"0","  filter(cut=='Ideal' & price<2000)"
