@@ -375,8 +375,8 @@ The following are core `stringr` functions that use regular expressions:
 #str_detect(posts,"mom")
 #str_subset(posts,"Noah Kahan")
 #str_extract(posts,"mom")
-str_replace(posts,"R","r")
-str_remove(posts,"r )
+replace<-str_replace(posts,"R","r")
+remove<-str_remove(posts,"r" )
 ```
 **Exercise:** Using the `words` data, find (1) words that start with "y" and (2) words that don't start with "y".
 
@@ -387,7 +387,7 @@ str_view(words, "['^'y]")
 
 # Match words that have not_vowel-y-not_vowel
 str_view(words, "[^y]")
-)
+
 ```
 
 ## Done!

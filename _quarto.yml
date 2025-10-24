@@ -44,7 +44,19 @@ book:
       - src/ica/ica-sample2.qmd
       - src/ica/cleaning.qmd
       - src/ica/03-adv-ggplot-notes.qmd
+     # - src/ica/04-adv-maps-1-notes.qmd
+      - src/ica/06-wrangling-1-notes.qmd
       - src/ica/07-wrangling-2-notes.qmd
+      - src/ica/08-missing-data-notes.qmd
+      - src/ica/09-functions-notes.qmd
+      - src/ica/10-base-r-notes.qmd
+      - src/ica/11-iteration-1-notes.qmd
+      - src/ica/12-iteration-2-notes.qmd
+
+
+
+
+
 
   appendices:
   - src/appx/appx-sample1.qmd
