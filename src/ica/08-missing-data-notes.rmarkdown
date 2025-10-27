@@ -2,7 +2,6 @@
 title: "8 Missing Data"
 ---
 
-
 ```{r doc_setup_08, echo=FALSE, message=FALSE}
 #install.packages('naniar')
 #install.packages('mice')
@@ -10,6 +9,8 @@ library(tidyverse)
 library(naniar)
 library(mice)
 ```
+
+
 
 ## 🧩 Learning Goals
 
@@ -161,14 +162,20 @@ Within a dataset, multiple mechanisms may be present--we need to consider the mi
 
 We'll look at the `airquality` dataset available in base R, which gives daily air quality measurements in New York from May to September 1973. You can pull up the codebook with `?airquality` in the Console.
 
+
+
 ```{r load_airqual}
 #| eval: true
 data(airquality)
 ```
 
+
+
 ## Missingness by Variable 
 
 We can explore how much missingness there is for each variable with the following functions:
+
+
 
 ```{r miss_by_var}
 #| eval: true
@@ -176,6 +183,8 @@ summary(airquality) # Summary statistics in addition to number of NA's
 naniar::vis_miss(airquality) # Where are NA's located?
 naniar::miss_var_summary(airquality) # Information from vis_miss() in table form
 ```
+
+
 
 ## Missingness by Case 
 
@@ -185,10 +194,14 @@ For each case, this function calculates the number and percentage of variables w
 
 **Impact of Information:** If the `pct_miss` column is large for a case, we likely won't be able to impute any of its missing values because there just isn't enough known information--this case will have to be dropped from the analysis.
 
+
+
 ```{r miss_by_case}
 #| eval: true
 naniar::miss_case_summary(airquality)
 ```
+
+
 
 ## Exploring Missingness Mechanisms 
 
@@ -204,6 +217,8 @@ Note: Through our available data, we are really only able to explore the potenti
 
 To explore these relationships, we can create TRUE/FALSE indicators of whether a variable is missing. In the plots below, we use `is.na(Ozone)` to explore whether cases with missing ozone values are noticeably different from cases with observed ozone values in terms of `Solar.R`.
 
+
+
 ```{r miss_box_dens}
 #| eval: true
 ggplot(airquality, aes(x = is.na(Ozone), y = Solar.R)) + 
@@ -211,6 +226,8 @@ ggplot(airquality, aes(x = is.na(Ozone), y = Solar.R)) +
 ggplot(airquality, aes(x = Solar.R, color = is.na(Ozone))) + 
     geom_density()
 ```
+
+
 
 The above boxplots and density plots suggest that missing ozone is not strongly related to solar radiation levels. 
 
@@ -226,6 +243,8 @@ In the scaterrplot below, we look at the relationship between `Ozone` and `Solar
 
 - **Impact of Information:** We see that missing `Ozone` cases are within the observed span of `Solar.R`, so we would be ok with predicting `Ozone` from `Solar.R` because there would be no **extrapolation**.
 
+
+
 ```{r miss_scatter_na_markers}
 #| eval: true
 ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
@@ -236,9 +255,13 @@ ggplot(airquality, aes(x = Solar.R, y = Ozone)) +
 
 
 
+
+
 ## Exercises 
 
 2. **Mechanism detection practice** Look at the boxplot + scatterplot pairs for Alternate Situations 1 and 2 below. How do these situations compare to our actual situation and to each other? What concerns might arise from using a model to impute `Ozone`?
+
+
 
 ```{r miss_scatter_na_markers_alt}
 #| eval: true
@@ -268,12 +291,16 @@ ggplot(airquality_mod, aes(x = Solar.R_mod2, y = Ozone)) +
     labs(title = "Alternate Situation 2")
 ```
 
+
+
 3. **Ozone mechanism detection** Continue the investigation of missingness for `Ozone`. 
 
 We want to see how `Month`, `Wind`, and `Temp` relate to the chance of missingness for `Ozone` and to the value of `Ozone`.
 
 Does it look like a linear regression model (perhaps with variable transformations) could be effective in imputing the missing ozone data?
 I do think that a linear regression could be ffective
+
+
 
 ```{r}
 
@@ -345,6 +372,8 @@ airquality |>
 
 
 
+
+
 ## Regression Imputation 
 
 When a model is built and used to generate a single set of predictions for missing values, this is known as **single imputation**. 
@@ -377,6 +406,8 @@ We can use a **simulation study** to investigate the statistical properties desc
 :::
 
 We will slowly step through the simulation study code below. We will pause frequently for you to add comments documenting what is happening. 
+
+
 
 ```{r mult_single_sim_study}
 set.seed(224)
@@ -425,7 +456,11 @@ for (i in 1:num_simulations) {
 })
 ```
 
+
+
 Below we compute the confidence interval (CI) coverage probability (fraction of times the CI contains the true value of `1`) for the CIs generated from single and multiple imputation:
+
+
 
 ```{r mult_single_sim_study_summ}
 ci_data <- bind_rows(ci_list)
@@ -435,7 +470,10 @@ ci_data |>
     summarize(frac_contains_truth = mean(contains_truth))
 ```
 
+
+
 ## Done!
 
 - Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website
+
 
