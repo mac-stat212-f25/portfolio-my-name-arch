@@ -1,6 +1,0 @@
-"0","ggplot(aes(x = carat, y = price), diamonds) + geom_point()"
-"1","[1m[33mError[39m in `ggplot()`:[22m
-[38;5;232m[33m![38;5;232m `mapping` must be created with `aes()`.
-[31m✖[38;5;232m You've supplied a tibble.[39m
-[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
-"

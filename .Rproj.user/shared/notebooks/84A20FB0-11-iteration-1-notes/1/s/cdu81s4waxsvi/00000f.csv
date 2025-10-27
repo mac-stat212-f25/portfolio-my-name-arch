@@ -1,2 +1,0 @@
-"0","diamonds |>"
-"0","    mutate(across(.cols = where(is.numeric), .fns = as.character))"

@@ -1,7 +1,0 @@
-"0","# Your code"
-"0","#string1 <- 'C:\Users'"
-"0","string2 <- 'C:\\Users'"
-"0","str_view(string2)"
-"1","[90m[1] │[39m C:\Users"
-"1","
-"

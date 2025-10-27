@@ -1,7 +1,0 @@
-"0","diamonds |>"
-"0","    mutate("
-"0","        carat = round(carat, 1),"
-"0","        x = round(x, 1),"
-"0","        y = round(y, 1),"
-"0","        z = round(z, 1)"
-"0","    )"

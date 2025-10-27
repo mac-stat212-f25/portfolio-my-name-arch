@@ -1,3 +1,0 @@
-"0","# Option 2: Use an ""anonymous"" or ""lambda"" function that isn't named/saved"
-"0","diamonds |> "
-"0","    mutate(across(.cols = c(carat, x, y, z), .fns = function(x) {round(x, digits = 1)} ))"

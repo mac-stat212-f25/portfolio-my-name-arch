@@ -1,5 +1,0 @@
-"0",""
-"0",""
-"0","# Anonymous functions can be written in a more concise way"
-"0","# function(x){ length(unique(x)) } OR ~ length(unique(.x))"
-"0","# function(x,y){ length(unique(x + y)) } OR ~ length(unique(.x + .y))"

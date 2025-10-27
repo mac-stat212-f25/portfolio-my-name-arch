@@ -1,8 +1,0 @@
-"0","xs <- diamonds |> select(carat, cut, clarity, color) |> names()"
-"0",""
-"0",""
-"0","df_arg_combos <- crossing("
-"0","    mod_formula = str_c(""price ~ "", map_chr(seq_along(xs), ~ str_c(xs[1:.x], collapse = "" + "")) ),"
-"0","    remove_outliers = c(TRUE, FALSE)"
-"0",")"
-"0","df_arg_combos"

@@ -1,9 +1,0 @@
-"0","if (logical_condition) {"
-"0","    # some code"
-"0","} else if (other_logical_condition) {"
-"0","    # some code"
-"0","} else {"
-"0","    # some code"
-"0","}"
-"2","Error: object 'logical_condition' not found
-"

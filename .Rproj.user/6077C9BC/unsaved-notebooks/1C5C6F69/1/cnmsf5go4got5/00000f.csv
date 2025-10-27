@@ -1,7 +1,0 @@
-"0","# Code for loading packages and reading in data"
-"0",""
-"0","library(dplyr)"
-"0","library(ggplot2)"
-"0","library(patchwork)"
-"0","weather_raw <- read.csv(""~/Documents/GitHub/portfolio-my-name-arch/data/raw/CopyOfweather.csv"")"
-"0",""

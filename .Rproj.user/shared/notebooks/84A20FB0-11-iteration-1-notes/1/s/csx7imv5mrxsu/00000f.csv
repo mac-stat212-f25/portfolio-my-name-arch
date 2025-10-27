@@ -1,7 +1,0 @@
-"0","#| eval: false"
-"0",""
-"0","for (i in some_vector) {"
-"0","    # Code to do stuff based on i"
-"0","}"
-"2","Error: object 'some_vector' not found
-"

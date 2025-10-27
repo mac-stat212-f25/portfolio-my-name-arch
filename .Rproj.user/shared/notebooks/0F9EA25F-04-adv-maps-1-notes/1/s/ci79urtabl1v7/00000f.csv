@@ -1,6 +1,0 @@
-"0",""
-"0","ggplot() + # plot frame"
-"0","    geom_sf(data = mn_counties, fill = ""white"") + # county boundary layer"
-"0","    geom_sf(data = mn_cities, size = 0.5) + # city point layer"
-"0","    ggthemes::theme_map()"
-"0",""

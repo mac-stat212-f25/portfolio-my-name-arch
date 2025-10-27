@@ -1,6 +1,0 @@
-"0","rescale <- function(x) {"
-"0","  # Find the minimum and maximum values, ignoring NAs"
-"0","  rng <- range(x, na.rm = TRUE)"
-"0","  # Apply the rescaling formula: (value - min) / (max - min)"
-"0","  (x - rng[1]) / (rng[2] - rng[1])"
-"0","}"

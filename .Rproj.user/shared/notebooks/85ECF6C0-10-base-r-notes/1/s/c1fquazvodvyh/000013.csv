@@ -1,2 +1,0 @@
-"0","# Compare with filter "
-"0","filter(tibble(x = x), x > 5)"

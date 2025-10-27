@@ -1,7 +1,0 @@
-"0","unnested_sim <- sim_data |> "
-"0","  unnest(rand_data) # convert the rand_data list to numeric vector"
-"0","  "
-"0","  "
-"0","unnested_sim |> "
-"0","  ggplot(aes(x = rand_data, group = mean, fill = factor(mean))) +"
-"0","  geom_density(alpha = .5)"
