@@ -1,0 +1,60 @@
+---
+title: "Homework 04"
+---
+
+
+## TidyTuesday Section (optional)
+
+::: {.callout-important title="Instructions"}
+
+You can count work on this week's TidyTuesday toward the exceptional work required for an A in the Homework component.
+
+:::
+
+
+Explore the week's [TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge. Develop a research question, then answer it through a short data story with [effective visualization(s)]({{< var effective-viz-url >}}).  Provide sufficient background for readers to grasp your narrative.
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+cranes <- read_csv("~/Documents/GitHub/portfolio-my-name-arch/src/tt/cranes.csv")
+crane_summary <- cranes %>%
+  mutate(observations = as.numeric(observations)) %>%
+  filter(comment != 'Record observation') %>%
+  group_by(comment) %>%
+  summarize(
+    avg_observations = mean(observations, na.rm = TRUE),
+    .groups = 'drop'
+  )
+
+
+print(crane_summary)
+
+
+ggplot(crane_summary, aes(x = comment, y = avg_observations, fill = comment)) +
+
+  geom_col(width = 0.6) +
+  geom_text(
+    # Label the bars with the rounded average value
+    aes(label = round(avg_observations, 0)),
+    vjust = -0.5, 
+    size = 4
+  ) +
+  labs(
+    title = "Average Observations by Comment Type",
+    subtitle = "Stat 212 Amin Al Hashim",
+    x = "Comment Type",
+    y = "Average Number of Observations",
+    caption = "Dooley Kim, 10-01-2025, Data source: cranes.csv."
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"
+  )
+```
+The question that I had was is there a relationship between crane observations and the comment on a day. I realized that there are certain comments that are left on days. So I was curious, whether these comments bear any effect on the amount observed. I did not include the record observations because I know that they will obviously have a higher average number of observations.
+
+So what this graph shows me is that the days when there is severe interference or an uncertain amount, we can expect a very high count, but the ends of the season do not see that many observations on average. This makes a bit of sense because logically,because at the borders of the season, it is probably a lot futher from the peak of the season which I would expect to be in the middle of the season. I was a bit surprised at how high severe interference and uncertain amount are.
