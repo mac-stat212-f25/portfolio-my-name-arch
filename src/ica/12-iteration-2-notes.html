@@ -466,6 +466,11 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../src/pv/pv-01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Professional Viz Sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../mm/mm.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Mind Maps</span></a>
   </div>
 </li>
@@ -576,10 +581,10 @@ cookieconsent.run({
 <pre><code># A tibble: 4 × 3
   type                  mem_alloc total_time
   &lt;chr&gt;                 &lt;bch:byt&gt;   &lt;bch:tm&gt;
-1 for_loop_no_storage     18.63GB      32.4s
-2 for_loop_with_storage  402.04KB    497.1ms
-3 purrr_map                1.08MB    537.4ms
-4 standard_func          150.65KB     30.6ms</code></pre>
+1 for_loop_no_storage     18.63GB      56.5s
+2 for_loop_with_storage  402.04KB    493.4ms
+3 purrr_map                1.08MB    525.7ms
+4 standard_func          150.65KB     59.6ms</code></pre>
 </div>
 </div>
 </section></section><section id="iteration-with-map" class="level2"><h2 class="anchored" data-anchor-id="iteration-with-map">Iteration with <code>map</code>
@@ -748,7 +753,7 @@ $z
 <span id="cb18-7"><a href="#cb18-7"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="12-iteration-2-notes_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="12-iteration-2-notes_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1470,355 +1475,353 @@ $z
 <span id="cb35-29"><a href="#cb35-29"></a><span class="ss">- </span>First, write out the steps in words.</span>
 <span id="cb35-30"><a href="#cb35-30"></a><span class="ss">- </span>Then translate each step to code.</span>
 <span id="cb35-31"><a href="#cb35-31"></a></span>
-<span id="cb35-34"><a href="#cb35-34"></a><span class="in">```{r}</span></span>
-<span id="cb35-35"><a href="#cb35-35"></a><span class="in">```</span></span>
+<span id="cb35-32"><a href="#cb35-32"></a></span>
+<span id="cb35-33"><a href="#cb35-33"></a><span class="fu">## Iteration with `purrr` </span></span>
+<span id="cb35-34"><a href="#cb35-34"></a></span>
+<span id="cb35-35"><a href="#cb35-35"></a><span class="in">`purrr`</span> is a <span class="in">`tidyverse`</span> package that provides several useful functions for iteration. </span>
 <span id="cb35-36"><a href="#cb35-36"></a></span>
-<span id="cb35-37"><a href="#cb35-37"></a><span class="fu">## Iteration with `purrr` </span></span>
+<span id="cb35-37"><a href="#cb35-37"></a></span>
 <span id="cb35-38"><a href="#cb35-38"></a></span>
-<span id="cb35-39"><a href="#cb35-39"></a><span class="in">`purrr`</span> is a <span class="in">`tidyverse`</span> package that provides several useful functions for iteration. </span>
+<span id="cb35-39"><a href="#cb35-39"></a>Open up the <span class="co">[</span><span class="ot">`purrr` cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/purrr.pdf)</span>.</span>
 <span id="cb35-40"><a href="#cb35-40"></a></span>
 <span id="cb35-41"><a href="#cb35-41"></a></span>
-<span id="cb35-42"><a href="#cb35-42"></a></span>
-<span id="cb35-43"><a href="#cb35-43"></a>Open up the <span class="co">[</span><span class="ot">`purrr` cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/purrr.pdf)</span>.</span>
-<span id="cb35-44"><a href="#cb35-44"></a></span>
-<span id="cb35-45"><a href="#cb35-45"></a></span>
-<span id="cb35-46"><a href="#cb35-46"></a>The main advantages of <span class="in">`purrr`</span> include:</span>
-<span id="cb35-47"><a href="#cb35-47"></a></span>
-<span id="cb35-48"><a href="#cb35-48"></a><span class="ss">- </span>Improved readability of R code</span>
-<span id="cb35-49"><a href="#cb35-49"></a><span class="ss">- </span>Reduction in the "overhead" in writing a <span class="in">`for`</span> loop </span>
-<span id="cb35-50"><a href="#cb35-50"></a><span class="ss">    - </span>These functions create storage containers </span>
-<span id="cb35-51"><a href="#cb35-51"></a><span class="ss">    - </span>These functions do the <span class="in">`for (i in ...)`</span> efficiently</span>
-<span id="cb35-52"><a href="#cb35-52"></a></span>
+<span id="cb35-42"><a href="#cb35-42"></a>The main advantages of <span class="in">`purrr`</span> include:</span>
+<span id="cb35-43"><a href="#cb35-43"></a></span>
+<span id="cb35-44"><a href="#cb35-44"></a><span class="ss">- </span>Improved readability of R code</span>
+<span id="cb35-45"><a href="#cb35-45"></a><span class="ss">- </span>Reduction in the "overhead" in writing a <span class="in">`for`</span> loop </span>
+<span id="cb35-46"><a href="#cb35-46"></a><span class="ss">    - </span>These functions create storage containers </span>
+<span id="cb35-47"><a href="#cb35-47"></a><span class="ss">    - </span>These functions do the <span class="in">`for (i in ...)`</span> efficiently</span>
+<span id="cb35-48"><a href="#cb35-48"></a></span>
+<span id="cb35-49"><a href="#cb35-49"></a></span>
+<span id="cb35-50"><a href="#cb35-50"></a><span class="fu">### Computational Time and Memory Allocation</span></span>
+<span id="cb35-51"><a href="#cb35-51"></a></span>
+<span id="cb35-52"><a href="#cb35-52"></a>Compare the four ways to create a vector of integers from 1 to 100,000.</span>
 <span id="cb35-53"><a href="#cb35-53"></a></span>
-<span id="cb35-54"><a href="#cb35-54"></a><span class="fu">### Computational Time and Memory Allocation</span></span>
-<span id="cb35-55"><a href="#cb35-55"></a></span>
-<span id="cb35-56"><a href="#cb35-56"></a>Compare the four ways to create a vector of integers from 1 to 100,000.</span>
-<span id="cb35-57"><a href="#cb35-57"></a></span>
-<span id="cb35-58"><a href="#cb35-58"></a></span>
-<span id="cb35-61"><a href="#cb35-61"></a><span class="in">```{r}</span></span>
-<span id="cb35-62"><a href="#cb35-62"></a><span class="co"># Example 1: For loop with no storage container; append new value to existing vector</span></span>
-<span id="cb35-63"><a href="#cb35-63"></a>x <span class="ot">&lt;-</span> <span class="fu">integer</span>()</span>
-<span id="cb35-64"><a href="#cb35-64"></a>results1 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
-<span id="cb35-65"><a href="#cb35-65"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>) {</span>
-<span id="cb35-66"><a href="#cb35-66"></a>    x <span class="ot">&lt;-</span> <span class="fu">c</span>(x, i)</span>
-<span id="cb35-67"><a href="#cb35-67"></a>  }</span>
-<span id="cb35-68"><a href="#cb35-68"></a>)</span>
-<span id="cb35-69"><a href="#cb35-69"></a></span>
-<span id="cb35-70"><a href="#cb35-70"></a><span class="co"># Example 2: For loop with a storage container!</span></span>
-<span id="cb35-71"><a href="#cb35-71"></a>x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">'integer'</span>, <span class="at">length =</span> <span class="fl">1e5</span>)</span>
-<span id="cb35-72"><a href="#cb35-72"></a>results2 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
-<span id="cb35-73"><a href="#cb35-73"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>) {</span>
-<span id="cb35-74"><a href="#cb35-74"></a>    x[i] <span class="ot">&lt;-</span> i</span>
-<span id="cb35-75"><a href="#cb35-75"></a>  }</span>
-<span id="cb35-76"><a href="#cb35-76"></a>)</span>
+<span id="cb35-54"><a href="#cb35-54"></a></span>
+<span id="cb35-57"><a href="#cb35-57"></a><span class="in">```{r}</span></span>
+<span id="cb35-58"><a href="#cb35-58"></a><span class="co"># Example 1: For loop with no storage container; append new value to existing vector</span></span>
+<span id="cb35-59"><a href="#cb35-59"></a>x <span class="ot">&lt;-</span> <span class="fu">integer</span>()</span>
+<span id="cb35-60"><a href="#cb35-60"></a>results1 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb35-61"><a href="#cb35-61"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>) {</span>
+<span id="cb35-62"><a href="#cb35-62"></a>    x <span class="ot">&lt;-</span> <span class="fu">c</span>(x, i)</span>
+<span id="cb35-63"><a href="#cb35-63"></a>  }</span>
+<span id="cb35-64"><a href="#cb35-64"></a>)</span>
+<span id="cb35-65"><a href="#cb35-65"></a></span>
+<span id="cb35-66"><a href="#cb35-66"></a><span class="co"># Example 2: For loop with a storage container!</span></span>
+<span id="cb35-67"><a href="#cb35-67"></a>x <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">'integer'</span>, <span class="at">length =</span> <span class="fl">1e5</span>)</span>
+<span id="cb35-68"><a href="#cb35-68"></a>results2 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(</span>
+<span id="cb35-69"><a href="#cb35-69"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>) {</span>
+<span id="cb35-70"><a href="#cb35-70"></a>    x[i] <span class="ot">&lt;-</span> i</span>
+<span id="cb35-71"><a href="#cb35-71"></a>  }</span>
+<span id="cb35-72"><a href="#cb35-72"></a>)</span>
+<span id="cb35-73"><a href="#cb35-73"></a></span>
+<span id="cb35-74"><a href="#cb35-74"></a><span class="co"># Example 3: purrr::map()</span></span>
+<span id="cb35-75"><a href="#cb35-75"></a>results3 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(purrr<span class="sc">::</span><span class="fu">map_int</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>, <span class="sc">~</span>.x))</span>
+<span id="cb35-76"><a href="#cb35-76"></a></span>
 <span id="cb35-77"><a href="#cb35-77"></a></span>
-<span id="cb35-78"><a href="#cb35-78"></a><span class="co"># Example 3: purrr::map()</span></span>
-<span id="cb35-79"><a href="#cb35-79"></a>results3 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(purrr<span class="sc">::</span><span class="fu">map_int</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e5</span>, <span class="sc">~</span>.x))</span>
-<span id="cb35-80"><a href="#cb35-80"></a></span>
+<span id="cb35-78"><a href="#cb35-78"></a><span class="co"># Example 4: Standard R Function/Operator</span></span>
+<span id="cb35-79"><a href="#cb35-79"></a>results4 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="fl">1e5</span>))</span>
+<span id="cb35-80"><a href="#cb35-80"></a><span class="in">```</span></span>
 <span id="cb35-81"><a href="#cb35-81"></a></span>
-<span id="cb35-82"><a href="#cb35-82"></a><span class="co"># Example 4: Standard R Function/Operator</span></span>
-<span id="cb35-83"><a href="#cb35-83"></a>results4 <span class="ot">&lt;-</span> bench<span class="sc">::</span><span class="fu">mark</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="fl">1e5</span>))</span>
-<span id="cb35-84"><a href="#cb35-84"></a><span class="in">```</span></span>
-<span id="cb35-85"><a href="#cb35-85"></a></span>
-<span id="cb35-88"><a href="#cb35-88"></a><span class="in">```{r}</span></span>
-<span id="cb35-89"><a href="#cb35-89"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb35-90"><a href="#cb35-90"></a><span class="co"># Compile Results</span></span>
-<span id="cb35-91"><a href="#cb35-91"></a><span class="fu">bind_rows</span>(results1, results2, results3, results4) <span class="sc">|&gt;</span></span>
-<span id="cb35-92"><a href="#cb35-92"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">c</span>(<span class="st">"for_loop_no_storage"</span>, <span class="st">"for_loop_with_storage"</span>, <span class="st">"purrr_map"</span>, <span class="st">"standard_func"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb35-93"><a href="#cb35-93"></a>  <span class="fu">select</span>(type, mem_alloc, total_time)  <span class="sc">|&gt;</span> <span class="fu">print</span>()</span>
+<span id="cb35-84"><a href="#cb35-84"></a><span class="in">```{r}</span></span>
+<span id="cb35-85"><a href="#cb35-85"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-86"><a href="#cb35-86"></a><span class="co"># Compile Results</span></span>
+<span id="cb35-87"><a href="#cb35-87"></a><span class="fu">bind_rows</span>(results1, results2, results3, results4) <span class="sc">|&gt;</span></span>
+<span id="cb35-88"><a href="#cb35-88"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">c</span>(<span class="st">"for_loop_no_storage"</span>, <span class="st">"for_loop_with_storage"</span>, <span class="st">"purrr_map"</span>, <span class="st">"standard_func"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-89"><a href="#cb35-89"></a>  <span class="fu">select</span>(type, mem_alloc, total_time)  <span class="sc">|&gt;</span> <span class="fu">print</span>()</span>
+<span id="cb35-90"><a href="#cb35-90"></a></span>
+<span id="cb35-91"><a href="#cb35-91"></a><span class="in">```</span></span>
+<span id="cb35-92"><a href="#cb35-92"></a></span>
+<span id="cb35-93"><a href="#cb35-93"></a><span class="fu">## Iteration with `map` </span></span>
 <span id="cb35-94"><a href="#cb35-94"></a></span>
-<span id="cb35-95"><a href="#cb35-95"></a><span class="in">```</span></span>
+<span id="cb35-95"><a href="#cb35-95"></a>In <span class="in">`purrr`</span>, we can use the family of <span class="in">`map()`</span> functions to iteratively apply a function to each element of a list or vector and save its output. </span>
 <span id="cb35-96"><a href="#cb35-96"></a></span>
-<span id="cb35-97"><a href="#cb35-97"></a><span class="fu">## Iteration with `map` </span></span>
-<span id="cb35-98"><a href="#cb35-98"></a></span>
-<span id="cb35-99"><a href="#cb35-99"></a>In <span class="in">`purrr`</span>, we can use the family of <span class="in">`map()`</span> functions to iteratively apply a function to each element of a list or vector and save its output. </span>
+<span id="cb35-97"><a href="#cb35-97"></a></span>
+<span id="cb35-98"><a href="#cb35-98"></a><span class="ss">- </span>Reminder: Data frames/tibbles are named lists so the elements are the "columns" so <span class="in">`map()`</span> can **iterate over columns of a dataset**.</span>
+<span id="cb35-99"><a href="#cb35-99"></a></span>
 <span id="cb35-100"><a href="#cb35-100"></a></span>
-<span id="cb35-101"><a href="#cb35-101"></a></span>
-<span id="cb35-102"><a href="#cb35-102"></a><span class="ss">- </span>Reminder: Data frames/tibbles are named lists so the elements are the "columns" so <span class="in">`map()`</span> can **iterate over columns of a dataset**.</span>
-<span id="cb35-103"><a href="#cb35-103"></a></span>
-<span id="cb35-104"><a href="#cb35-104"></a></span>
-<span id="cb35-105"><a href="#cb35-105"></a>Let's look at the <span class="co">[</span><span class="ot">`purrr` cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/purrr.pdf)</span> to look at graphical representations of how these functions work.</span>
-<span id="cb35-106"><a href="#cb35-106"></a></span>
-<span id="cb35-107"><a href="#cb35-107"></a><span class="ss">- </span><span class="in">`map()`</span> returns a list</span>
-<span id="cb35-108"><a href="#cb35-108"></a><span class="ss">- </span><span class="in">`map_chr()`</span> returns a character vector</span>
-<span id="cb35-109"><a href="#cb35-109"></a><span class="ss">- </span><span class="in">`map_lgl()`</span> returns a logical vector</span>
-<span id="cb35-110"><a href="#cb35-110"></a><span class="ss">- </span><span class="in">`map_int()`</span> returns an integer vector</span>
-<span id="cb35-111"><a href="#cb35-111"></a><span class="ss">- </span><span class="in">`map_dbl()`</span> returns a numeric vector</span>
-<span id="cb35-112"><a href="#cb35-112"></a><span class="ss">- </span><span class="in">`map_vec()`</span> returns a vector of a different (non-atomic) type (like dates)</span>
-<span id="cb35-113"><a href="#cb35-113"></a></span>
+<span id="cb35-101"><a href="#cb35-101"></a>Let's look at the <span class="co">[</span><span class="ot">`purrr` cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/purrr.pdf)</span> to look at graphical representations of how these functions work.</span>
+<span id="cb35-102"><a href="#cb35-102"></a></span>
+<span id="cb35-103"><a href="#cb35-103"></a><span class="ss">- </span><span class="in">`map()`</span> returns a list</span>
+<span id="cb35-104"><a href="#cb35-104"></a><span class="ss">- </span><span class="in">`map_chr()`</span> returns a character vector</span>
+<span id="cb35-105"><a href="#cb35-105"></a><span class="ss">- </span><span class="in">`map_lgl()`</span> returns a logical vector</span>
+<span id="cb35-106"><a href="#cb35-106"></a><span class="ss">- </span><span class="in">`map_int()`</span> returns an integer vector</span>
+<span id="cb35-107"><a href="#cb35-107"></a><span class="ss">- </span><span class="in">`map_dbl()`</span> returns a numeric vector</span>
+<span id="cb35-108"><a href="#cb35-108"></a><span class="ss">- </span><span class="in">`map_vec()`</span> returns a vector of a different (non-atomic) type (like dates)</span>
+<span id="cb35-109"><a href="#cb35-109"></a></span>
+<span id="cb35-110"><a href="#cb35-110"></a></span>
+<span id="cb35-111"><a href="#cb35-111"></a>Let's return to our original task to replicate <span class="in">`str()`</span>.</span>
+<span id="cb35-112"><a href="#cb35-112"></a></span>
+<span id="cb35-113"><a href="#cb35-113"></a>To get the <span class="in">`class()`</span> of each data frame column, <span class="in">`map_chr()`</span> is sensible because classes are strings:</span>
 <span id="cb35-114"><a href="#cb35-114"></a></span>
-<span id="cb35-115"><a href="#cb35-115"></a>Let's return to our original task to replicate <span class="in">`str()`</span>.</span>
-<span id="cb35-116"><a href="#cb35-116"></a></span>
-<span id="cb35-117"><a href="#cb35-117"></a>To get the <span class="in">`class()`</span> of each data frame column, <span class="in">`map_chr()`</span> is sensible because classes are strings:</span>
+<span id="cb35-115"><a href="#cb35-115"></a><span class="in">```{r purrr_col_classes}</span></span>
+<span id="cb35-116"><a href="#cb35-116"></a><span class="fu">map_chr</span>(mtcars, class)</span>
+<span id="cb35-117"><a href="#cb35-117"></a><span class="in">```</span></span>
 <span id="cb35-118"><a href="#cb35-118"></a></span>
-<span id="cb35-119"><a href="#cb35-119"></a><span class="in">```{r purrr_col_classes}</span></span>
-<span id="cb35-120"><a href="#cb35-120"></a><span class="fu">map_chr</span>(mtcars, class)</span>
-<span id="cb35-121"><a href="#cb35-121"></a><span class="in">```</span></span>
-<span id="cb35-122"><a href="#cb35-122"></a></span>
-<span id="cb35-123"><a href="#cb35-123"></a></span>
-<span id="cb35-124"><a href="#cb35-124"></a>Let's get the class of each variable in <span class="in">`diamonds`</span>:</span>
+<span id="cb35-119"><a href="#cb35-119"></a></span>
+<span id="cb35-120"><a href="#cb35-120"></a>Let's get the class of each variable in <span class="in">`diamonds`</span>:</span>
+<span id="cb35-121"><a href="#cb35-121"></a></span>
+<span id="cb35-122"><a href="#cb35-122"></a><span class="in">```{r purrr_col_classes_error, error=TRUE}</span></span>
+<span id="cb35-123"><a href="#cb35-123"></a><span class="fu">map_chr</span>(diamonds, class)</span>
+<span id="cb35-124"><a href="#cb35-124"></a><span class="in">```</span></span>
 <span id="cb35-125"><a href="#cb35-125"></a></span>
-<span id="cb35-126"><a href="#cb35-126"></a><span class="in">```{r purrr_col_classes_error, error=TRUE}</span></span>
-<span id="cb35-127"><a href="#cb35-127"></a><span class="fu">map_chr</span>(diamonds, class)</span>
-<span id="cb35-128"><a href="#cb35-128"></a><span class="in">```</span></span>
+<span id="cb35-126"><a href="#cb35-126"></a>What happened!? </span>
+<span id="cb35-127"><a href="#cb35-127"></a></span>
+<span id="cb35-128"><a href="#cb35-128"></a><span class="in">`map_chr()`</span> was expecting to create a character vector with one element per element (column) in <span class="in">`diamonds`</span>. But something happened in column 2 with the <span class="in">`cut`</span> variable. </span>
 <span id="cb35-129"><a href="#cb35-129"></a></span>
-<span id="cb35-130"><a href="#cb35-130"></a>What happened!? </span>
-<span id="cb35-131"><a href="#cb35-131"></a></span>
-<span id="cb35-132"><a href="#cb35-132"></a><span class="in">`map_chr()`</span> was expecting to create a character vector with one element per element (column) in <span class="in">`diamonds`</span>. But something happened in column 2 with the <span class="in">`cut`</span> variable. </span>
-<span id="cb35-133"><a href="#cb35-133"></a></span>
-<span id="cb35-134"><a href="#cb35-134"></a></span>
-<span id="cb35-135"><a href="#cb35-135"></a>Let's figure out what happened:</span>
+<span id="cb35-130"><a href="#cb35-130"></a></span>
+<span id="cb35-131"><a href="#cb35-131"></a>Let's figure out what happened:</span>
+<span id="cb35-132"><a href="#cb35-132"></a></span>
+<span id="cb35-133"><a href="#cb35-133"></a><span class="in">```{r class_diamonds_cut}</span></span>
+<span id="cb35-134"><a href="#cb35-134"></a><span class="fu">class</span>(diamonds<span class="sc">$</span>cut)</span>
+<span id="cb35-135"><a href="#cb35-135"></a><span class="in">```</span></span>
 <span id="cb35-136"><a href="#cb35-136"></a></span>
-<span id="cb35-137"><a href="#cb35-137"></a><span class="in">```{r class_diamonds_cut}</span></span>
-<span id="cb35-138"><a href="#cb35-138"></a><span class="fu">class</span>(diamonds<span class="sc">$</span>cut)</span>
-<span id="cb35-139"><a href="#cb35-139"></a><span class="in">```</span></span>
-<span id="cb35-140"><a href="#cb35-140"></a></span>
-<span id="cb35-141"><a href="#cb35-141"></a>Ah! <span class="in">`cut`</span> has 2 classes. In this case, <span class="in">`map()`</span> (which returns a list) is the best option because some variables have multiple classes:</span>
+<span id="cb35-137"><a href="#cb35-137"></a>Ah! <span class="in">`cut`</span> has 2 classes. In this case, <span class="in">`map()`</span> (which returns a list) is the best option because some variables have multiple classes:</span>
+<span id="cb35-138"><a href="#cb35-138"></a></span>
+<span id="cb35-139"><a href="#cb35-139"></a><span class="in">```{r purrr_col_classes_no_error}</span></span>
+<span id="cb35-140"><a href="#cb35-140"></a><span class="fu">map</span>(diamonds, class)</span>
+<span id="cb35-141"><a href="#cb35-141"></a><span class="in">```</span></span>
 <span id="cb35-142"><a href="#cb35-142"></a></span>
-<span id="cb35-143"><a href="#cb35-143"></a><span class="in">```{r purrr_col_classes_no_error}</span></span>
-<span id="cb35-144"><a href="#cb35-144"></a><span class="fu">map</span>(diamonds, class)</span>
-<span id="cb35-145"><a href="#cb35-145"></a><span class="in">```</span></span>
-<span id="cb35-146"><a href="#cb35-146"></a></span>
-<span id="cb35-147"><a href="#cb35-147"></a>The error we encountered with <span class="in">`map_chr()`</span> is a nice feature of <span class="in">`purrr`</span> because it allows us to be very sure of the type of output we are getting.</span>
+<span id="cb35-143"><a href="#cb35-143"></a>The error we encountered with <span class="in">`map_chr()`</span> is a nice feature of <span class="in">`purrr`</span> because it allows us to be very sure of the type of output we are getting.</span>
+<span id="cb35-144"><a href="#cb35-144"></a></span>
+<span id="cb35-145"><a href="#cb35-145"></a></span>
+<span id="cb35-146"><a href="#cb35-146"></a>**Failing loudly is vastly preferable to getting unexpected outputs silently** </span>
+<span id="cb35-147"><a href="#cb35-147"></a></span>
 <span id="cb35-148"><a href="#cb35-148"></a></span>
-<span id="cb35-149"><a href="#cb35-149"></a></span>
-<span id="cb35-150"><a href="#cb35-150"></a>**Failing loudly is vastly preferable to getting unexpected outputs silently** </span>
-<span id="cb35-151"><a href="#cb35-151"></a></span>
+<span id="cb35-149"><a href="#cb35-149"></a>Recall that we explored syntax and functions for selecting variables in a data frame via the tidy-select documentation for <span class="in">`across`</span>. (<span class="in">`?dplyr_tidy_select`</span> in the Console.) </span>
+<span id="cb35-150"><a href="#cb35-150"></a></span>
+<span id="cb35-151"><a href="#cb35-151"></a>We can also combine <span class="in">`map_*()`</span> functions with tidy selection for some powerful variable summaries that require much less code than <span class="in">`for`</span> loops.</span>
 <span id="cb35-152"><a href="#cb35-152"></a></span>
-<span id="cb35-153"><a href="#cb35-153"></a>Recall that we explored syntax and functions for selecting variables in a data frame via the tidy-select documentation for <span class="in">`across`</span>. (<span class="in">`?dplyr_tidy_select`</span> in the Console.) </span>
-<span id="cb35-154"><a href="#cb35-154"></a></span>
-<span id="cb35-155"><a href="#cb35-155"></a>We can also combine <span class="in">`map_*()`</span> functions with tidy selection for some powerful variable summaries that require much less code than <span class="in">`for`</span> loops.</span>
+<span id="cb35-153"><a href="#cb35-153"></a><span class="in">```{r purrr_examples_by_col}</span></span>
+<span id="cb35-154"><a href="#cb35-154"></a><span class="co"># Mean of each numeric variable</span></span>
+<span id="cb35-155"><a href="#cb35-155"></a><span class="fu">map_dbl</span>(diamonds <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)), mean)</span>
 <span id="cb35-156"><a href="#cb35-156"></a></span>
-<span id="cb35-157"><a href="#cb35-157"></a><span class="in">```{r purrr_examples_by_col}</span></span>
-<span id="cb35-158"><a href="#cb35-158"></a><span class="co"># Mean of each numeric variable</span></span>
-<span id="cb35-159"><a href="#cb35-159"></a><span class="fu">map_dbl</span>(diamonds <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)), mean)</span>
+<span id="cb35-157"><a href="#cb35-157"></a><span class="co"># Number of unique values in each non-numeric variable</span></span>
+<span id="cb35-158"><a href="#cb35-158"></a><span class="fu">map_int</span>(diamonds <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span><span class="fu">where</span>(is.numeric)), n_distinct)</span>
+<span id="cb35-159"><a href="#cb35-159"></a><span class="in">```</span></span>
 <span id="cb35-160"><a href="#cb35-160"></a></span>
-<span id="cb35-161"><a href="#cb35-161"></a><span class="co"># Number of unique values in each non-numeric variable</span></span>
-<span id="cb35-162"><a href="#cb35-162"></a><span class="fu">map_int</span>(diamonds <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span><span class="fu">where</span>(is.numeric)), n_distinct)</span>
-<span id="cb35-163"><a href="#cb35-163"></a><span class="in">```</span></span>
-<span id="cb35-164"><a href="#cb35-164"></a></span>
+<span id="cb35-161"><a href="#cb35-161"></a></span>
+<span id="cb35-162"><a href="#cb35-162"></a><span class="fu">## Exercises   </span></span>
+<span id="cb35-163"><a href="#cb35-163"></a></span>
+<span id="cb35-164"><a href="#cb35-164"></a><span class="ss">1. </span>We want to compute several summary statistics on each quantitative variable in a data frame and organize the results in a new data frame (rows = variables, columns = summary statistics).</span>
 <span id="cb35-165"><a href="#cb35-165"></a></span>
-<span id="cb35-166"><a href="#cb35-166"></a><span class="fu">## Exercises   </span></span>
-<span id="cb35-167"><a href="#cb35-167"></a></span>
-<span id="cb35-168"><a href="#cb35-168"></a><span class="ss">1. </span>We want to compute several summary statistics on each quantitative variable in a data frame and organize the results in a new data frame (rows = variables, columns = summary statistics).</span>
-<span id="cb35-169"><a href="#cb35-169"></a></span>
-<span id="cb35-170"><a href="#cb35-170"></a><span class="ss">- </span>Write a function called <span class="in">`summ_stats()`</span> that takes a numeric vector <span class="in">`x`</span> as input and returns the mean, median, standard deviation, and IQR as a data frame. You can use <span class="in">`tibble()`</span> to create the data frame.</span>
-<span id="cb35-171"><a href="#cb35-171"></a><span class="ss">    - </span>Example: <span class="in">`tibble(a = 1:2, b = 2:3)`</span> creates a data frame with variables <span class="in">`a`</span> and <span class="in">`b`</span>.</span>
-<span id="cb35-172"><a href="#cb35-172"></a><span class="ss">- </span>Use a <span class="in">`map*()`</span> function from <span class="in">`purrr`</span> to get the summary statistics for each quantitative variable in <span class="in">`diamonds`</span>.</span>
-<span id="cb35-173"><a href="#cb35-173"></a><span class="ss">- </span>Look up the <span class="in">`bind_rows()`</span> documentation from <span class="in">`dplyr`</span> to combine summary statistics for all quantitative variables into one data frame.</span>
-<span id="cb35-174"><a href="#cb35-174"></a><span class="ss">    - </span>Note: You'll notice that the variable names are not present in the output. Try to figure out a way to add variable names back in with <span class="in">`mutate()`</span> and <span class="in">`colnames()`</span>.</span>
-<span id="cb35-175"><a href="#cb35-175"></a>    </span>
-<span id="cb35-176"><a href="#cb35-176"></a>    </span>
-<span id="cb35-177"><a href="#cb35-177"></a>Once you've done that with <span class="in">`map()`</span>, write a <span class="in">`for`</span> loop to achieve the same result. Which do you prefer in terms of ease of code writing and readability?</span>
-<span id="cb35-178"><a href="#cb35-178"></a></span>
+<span id="cb35-166"><a href="#cb35-166"></a><span class="ss">- </span>Write a function called <span class="in">`summ_stats()`</span> that takes a numeric vector <span class="in">`x`</span> as input and returns the mean, median, standard deviation, and IQR as a data frame. You can use <span class="in">`tibble()`</span> to create the data frame.</span>
+<span id="cb35-167"><a href="#cb35-167"></a><span class="ss">    - </span>Example: <span class="in">`tibble(a = 1:2, b = 2:3)`</span> creates a data frame with variables <span class="in">`a`</span> and <span class="in">`b`</span>.</span>
+<span id="cb35-168"><a href="#cb35-168"></a><span class="ss">- </span>Use a <span class="in">`map*()`</span> function from <span class="in">`purrr`</span> to get the summary statistics for each quantitative variable in <span class="in">`diamonds`</span>.</span>
+<span id="cb35-169"><a href="#cb35-169"></a><span class="ss">- </span>Look up the <span class="in">`bind_rows()`</span> documentation from <span class="in">`dplyr`</span> to combine summary statistics for all quantitative variables into one data frame.</span>
+<span id="cb35-170"><a href="#cb35-170"></a><span class="ss">    - </span>Note: You'll notice that the variable names are not present in the output. Try to figure out a way to add variable names back in with <span class="in">`mutate()`</span> and <span class="in">`colnames()`</span>.</span>
+<span id="cb35-171"><a href="#cb35-171"></a>    </span>
+<span id="cb35-172"><a href="#cb35-172"></a>    </span>
+<span id="cb35-173"><a href="#cb35-173"></a>Once you've done that with <span class="in">`map()`</span>, write a <span class="in">`for`</span> loop to achieve the same result. Which do you prefer in terms of ease of code writing and readability?</span>
+<span id="cb35-174"><a href="#cb35-174"></a></span>
+<span id="cb35-175"><a href="#cb35-175"></a></span>
+<span id="cb35-176"><a href="#cb35-176"></a></span>
+<span id="cb35-177"><a href="#cb35-177"></a></span>
+<span id="cb35-178"><a href="#cb35-178"></a><span class="fu">## Iteration with `map2` or `pmap` </span></span>
 <span id="cb35-179"><a href="#cb35-179"></a></span>
-<span id="cb35-180"><a href="#cb35-180"></a></span>
+<span id="cb35-180"><a href="#cb35-180"></a>If you need to iterate over the **rows of a data frame**, we'll need other versions of <span class="in">`map`</span>(). </span>
 <span id="cb35-181"><a href="#cb35-181"></a></span>
-<span id="cb35-182"><a href="#cb35-182"></a><span class="fu">## Iteration with `map2` or `pmap` </span></span>
-<span id="cb35-183"><a href="#cb35-183"></a></span>
-<span id="cb35-184"><a href="#cb35-184"></a>If you need to iterate over the **rows of a data frame**, we'll need other versions of <span class="in">`map`</span>(). </span>
-<span id="cb35-185"><a href="#cb35-185"></a></span>
+<span id="cb35-182"><a href="#cb35-182"></a></span>
+<span id="cb35-183"><a href="#cb35-183"></a><span class="in">`purrr`</span> also offers <span class="in">`map2()`</span> and the <span class="in">`pmap()`</span> family of functions that take multiple inputs and loops over them simultaneously. </span>
+<span id="cb35-184"><a href="#cb35-184"></a></span>
+<span id="cb35-185"><a href="#cb35-185"></a>Let's look at the <span class="co">[</span><span class="ot">`purrr` cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/purrr.pdf)</span> to look at graphical representations of how these functions work.</span>
 <span id="cb35-186"><a href="#cb35-186"></a></span>
-<span id="cb35-187"><a href="#cb35-187"></a><span class="in">`purrr`</span> also offers <span class="in">`map2()`</span> and the <span class="in">`pmap()`</span> family of functions that take multiple inputs and loops over them simultaneously. </span>
-<span id="cb35-188"><a href="#cb35-188"></a></span>
-<span id="cb35-189"><a href="#cb35-189"></a>Let's look at the <span class="co">[</span><span class="ot">`purrr` cheatsheet</span><span class="co">](https://rstudio.github.io/cheatsheets/purrr.pdf)</span> to look at graphical representations of how these functions work.</span>
-<span id="cb35-190"><a href="#cb35-190"></a></span>
-<span id="cb35-191"><a href="#cb35-191"></a></span>
-<span id="cb35-192"><a href="#cb35-192"></a>Let's look at this code to randomly simulate data from Normal distributions.</span>
-<span id="cb35-193"><a href="#cb35-193"></a></span>
-<span id="cb35-194"><a href="#cb35-194"></a><span class="in">```{r pmap_ex1}</span></span>
-<span id="cb35-195"><a href="#cb35-195"></a>args <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb35-196"><a href="#cb35-196"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>), <span class="co"># this is n</span></span>
-<span id="cb35-197"><a href="#cb35-197"></a>  <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),            <span class="co"># this is mean</span></span>
-<span id="cb35-198"><a href="#cb35-198"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)            <span class="co"># this is sd</span></span>
-<span id="cb35-199"><a href="#cb35-199"></a>)</span>
+<span id="cb35-187"><a href="#cb35-187"></a></span>
+<span id="cb35-188"><a href="#cb35-188"></a>Let's look at this code to randomly simulate data from Normal distributions.</span>
+<span id="cb35-189"><a href="#cb35-189"></a></span>
+<span id="cb35-190"><a href="#cb35-190"></a><span class="in">```{r pmap_ex1}</span></span>
+<span id="cb35-191"><a href="#cb35-191"></a>args <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb35-192"><a href="#cb35-192"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">100</span>), <span class="co"># this is n</span></span>
+<span id="cb35-193"><a href="#cb35-193"></a>  <span class="at">mean =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),            <span class="co"># this is mean</span></span>
+<span id="cb35-194"><a href="#cb35-194"></a>  <span class="at">sd =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>)            <span class="co"># this is sd</span></span>
+<span id="cb35-195"><a href="#cb35-195"></a>)</span>
+<span id="cb35-196"><a href="#cb35-196"></a></span>
+<span id="cb35-197"><a href="#cb35-197"></a><span class="co"># save randomly generated data in tibble with simulation parameters</span></span>
+<span id="cb35-198"><a href="#cb35-198"></a>sim_data <span class="ot">&lt;-</span> args <span class="sc">|&gt;</span></span>
+<span id="cb35-199"><a href="#cb35-199"></a>  <span class="fu">mutate</span>(<span class="at">rand_data =</span> <span class="fu">pmap</span>(args, rnorm))</span>
 <span id="cb35-200"><a href="#cb35-200"></a></span>
-<span id="cb35-201"><a href="#cb35-201"></a><span class="co"># save randomly generated data in tibble with simulation parameters</span></span>
-<span id="cb35-202"><a href="#cb35-202"></a>sim_data <span class="ot">&lt;-</span> args <span class="sc">|&gt;</span></span>
-<span id="cb35-203"><a href="#cb35-203"></a>  <span class="fu">mutate</span>(<span class="at">rand_data =</span> <span class="fu">pmap</span>(args, rnorm))</span>
-<span id="cb35-204"><a href="#cb35-204"></a></span>
-<span id="cb35-205"><a href="#cb35-205"></a>sim_data</span>
-<span id="cb35-206"><a href="#cb35-206"></a><span class="in">```</span></span>
+<span id="cb35-201"><a href="#cb35-201"></a>sim_data</span>
+<span id="cb35-202"><a href="#cb35-202"></a><span class="in">```</span></span>
+<span id="cb35-203"><a href="#cb35-203"></a></span>
+<span id="cb35-204"><a href="#cb35-204"></a>Note how the column names in <span class="in">`args`</span> exactly match the argument names in <span class="in">`rnorm()`</span>. </span>
+<span id="cb35-205"><a href="#cb35-205"></a></span>
+<span id="cb35-206"><a href="#cb35-206"></a>The iteration that is happening is across rows, and the multiple arguments in <span class="in">`rnorm()`</span> are being matched by name.</span>
 <span id="cb35-207"><a href="#cb35-207"></a></span>
-<span id="cb35-208"><a href="#cb35-208"></a>Note how the column names in <span class="in">`args`</span> exactly match the argument names in <span class="in">`rnorm()`</span>. </span>
-<span id="cb35-209"><a href="#cb35-209"></a></span>
-<span id="cb35-210"><a href="#cb35-210"></a>The iteration that is happening is across rows, and the multiple arguments in <span class="in">`rnorm()`</span> are being matched by name.</span>
-<span id="cb35-211"><a href="#cb35-211"></a></span>
-<span id="cb35-212"><a href="#cb35-212"></a></span>
-<span id="cb35-213"><a href="#cb35-213"></a>To access the information in that <span class="in">`rand_data`</span> list, we need to <span class="in">`unnest()`</span> this list! It converts/unfolds the information into a numeric vector (repeating the information in <span class="in">`mean`</span>, <span class="in">`sd`</span>, <span class="in">`n`</span>)</span>
-<span id="cb35-214"><a href="#cb35-214"></a></span>
-<span id="cb35-217"><a href="#cb35-217"></a><span class="in">```{r}</span></span>
-<span id="cb35-218"><a href="#cb35-218"></a>unnested_sim <span class="ot">&lt;-</span> sim_data <span class="sc">|&gt;</span> </span>
-<span id="cb35-219"><a href="#cb35-219"></a>  <span class="fu">unnest</span>(rand_data) <span class="co"># convert the rand_data list to numeric vector</span></span>
-<span id="cb35-220"><a href="#cb35-220"></a>  </span>
-<span id="cb35-221"><a href="#cb35-221"></a>  </span>
-<span id="cb35-222"><a href="#cb35-222"></a>unnested_sim <span class="sc">|&gt;</span> </span>
-<span id="cb35-223"><a href="#cb35-223"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rand_data, <span class="at">group =</span> mean, <span class="at">fill =</span> <span class="fu">factor</span>(mean))) <span class="sc">+</span></span>
-<span id="cb35-224"><a href="#cb35-224"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span>
-<span id="cb35-225"><a href="#cb35-225"></a><span class="in">```</span></span>
-<span id="cb35-226"><a href="#cb35-226"></a></span>
-<span id="cb35-227"><a href="#cb35-227"></a></span>
-<span id="cb35-228"><a href="#cb35-228"></a>We can also use <span class="in">`pmap()`</span> to specify variations in some arguments but leave some arguments constant across the iterations:</span>
-<span id="cb35-229"><a href="#cb35-229"></a></span>
-<span id="cb35-230"><a href="#cb35-230"></a><span class="in">```{r pmap_ex2}</span></span>
-<span id="cb35-231"><a href="#cb35-231"></a>string_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb35-232"><a href="#cb35-232"></a>    <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"p"</span>, <span class="st">"n"</span>, <span class="st">"h"</span>),</span>
-<span id="cb35-233"><a href="#cb35-233"></a>    <span class="at">replacement =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"N"</span>, <span class="st">"H"</span>)</span>
-<span id="cb35-234"><a href="#cb35-234"></a>)</span>
+<span id="cb35-208"><a href="#cb35-208"></a></span>
+<span id="cb35-209"><a href="#cb35-209"></a>To access the information in that <span class="in">`rand_data`</span> list, we need to <span class="in">`unnest()`</span> this list! It converts/unfolds the information into a numeric vector (repeating the information in <span class="in">`mean`</span>, <span class="in">`sd`</span>, <span class="in">`n`</span>)</span>
+<span id="cb35-210"><a href="#cb35-210"></a></span>
+<span id="cb35-213"><a href="#cb35-213"></a><span class="in">```{r}</span></span>
+<span id="cb35-214"><a href="#cb35-214"></a>unnested_sim <span class="ot">&lt;-</span> sim_data <span class="sc">|&gt;</span> </span>
+<span id="cb35-215"><a href="#cb35-215"></a>  <span class="fu">unnest</span>(rand_data) <span class="co"># convert the rand_data list to numeric vector</span></span>
+<span id="cb35-216"><a href="#cb35-216"></a>  </span>
+<span id="cb35-217"><a href="#cb35-217"></a>  </span>
+<span id="cb35-218"><a href="#cb35-218"></a>unnested_sim <span class="sc">|&gt;</span> </span>
+<span id="cb35-219"><a href="#cb35-219"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rand_data, <span class="at">group =</span> mean, <span class="at">fill =</span> <span class="fu">factor</span>(mean))) <span class="sc">+</span></span>
+<span id="cb35-220"><a href="#cb35-220"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> .<span class="dv">5</span>)</span>
+<span id="cb35-221"><a href="#cb35-221"></a><span class="in">```</span></span>
+<span id="cb35-222"><a href="#cb35-222"></a></span>
+<span id="cb35-223"><a href="#cb35-223"></a></span>
+<span id="cb35-224"><a href="#cb35-224"></a>We can also use <span class="in">`pmap()`</span> to specify variations in some arguments but leave some arguments constant across the iterations:</span>
+<span id="cb35-225"><a href="#cb35-225"></a></span>
+<span id="cb35-226"><a href="#cb35-226"></a><span class="in">```{r pmap_ex2}</span></span>
+<span id="cb35-227"><a href="#cb35-227"></a>string_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb35-228"><a href="#cb35-228"></a>    <span class="at">pattern =</span> <span class="fu">c</span>(<span class="st">"p"</span>, <span class="st">"n"</span>, <span class="st">"h"</span>),</span>
+<span id="cb35-229"><a href="#cb35-229"></a>    <span class="at">replacement =</span> <span class="fu">c</span>(<span class="st">"P"</span>, <span class="st">"N"</span>, <span class="st">"H"</span>)</span>
+<span id="cb35-230"><a href="#cb35-230"></a>)</span>
+<span id="cb35-231"><a href="#cb35-231"></a></span>
+<span id="cb35-232"><a href="#cb35-232"></a><span class="fu">pmap_chr</span>(string_data, str_replace_all, <span class="at">string =</span> <span class="st">"ppp nnn hhh"</span>)</span>
+<span id="cb35-233"><a href="#cb35-233"></a><span class="in">```</span></span>
+<span id="cb35-234"><a href="#cb35-234"></a></span>
 <span id="cb35-235"><a href="#cb35-235"></a></span>
-<span id="cb35-236"><a href="#cb35-236"></a><span class="fu">pmap_chr</span>(string_data, str_replace_all, <span class="at">string =</span> <span class="st">"ppp nnn hhh"</span>)</span>
-<span id="cb35-237"><a href="#cb35-237"></a><span class="in">```</span></span>
-<span id="cb35-238"><a href="#cb35-238"></a></span>
+<span id="cb35-236"><a href="#cb35-236"></a><span class="fu">## Exercises </span></span>
+<span id="cb35-237"><a href="#cb35-237"></a></span>
+<span id="cb35-238"><a href="#cb35-238"></a><span class="ss">1. </span>Create 2 small examples that show how <span class="in">`pmap()`</span> works with <span class="in">`str_sub()`</span>. Your examples should:</span>
 <span id="cb35-239"><a href="#cb35-239"></a></span>
-<span id="cb35-240"><a href="#cb35-240"></a><span class="fu">## Exercises </span></span>
-<span id="cb35-241"><a href="#cb35-241"></a></span>
-<span id="cb35-242"><a href="#cb35-242"></a><span class="ss">1. </span>Create 2 small examples that show how <span class="in">`pmap()`</span> works with <span class="in">`str_sub()`</span>. Your examples should:</span>
-<span id="cb35-243"><a href="#cb35-243"></a></span>
-<span id="cb35-244"><a href="#cb35-244"></a><span class="ss">- </span>Use different arguments for <span class="in">`string`</span>, <span class="in">`start`</span>, and <span class="in">`end`</span></span>
-<span id="cb35-245"><a href="#cb35-245"></a><span class="ss">- </span>Use different arguments for <span class="in">`start`</span> and <span class="in">`end`</span> but a fixed <span class="in">`string`</span></span>
-<span id="cb35-246"><a href="#cb35-246"></a></span>
-<span id="cb35-249"><a href="#cb35-249"></a><span class="in">```{r}</span></span>
-<span id="cb35-250"><a href="#cb35-250"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb35-251"><a href="#cb35-251"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb35-252"><a href="#cb35-252"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb35-253"><a href="#cb35-253"></a></span>
-<span id="cb35-254"><a href="#cb35-254"></a><span class="co"># Create a tibble with varying arguments</span></span>
-<span id="cb35-255"><a href="#cb35-255"></a>varied_args <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb35-256"><a href="#cb35-256"></a>  <span class="at">string =</span> <span class="fu">c</span>(<span class="st">"R-programming"</span>, <span class="st">"is-fun"</span>, <span class="st">"tidyverse"</span>),</span>
-<span id="cb35-257"><a href="#cb35-257"></a>  <span class="at">start  =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>),</span>
-<span id="cb35-258"><a href="#cb35-258"></a>  <span class="at">end    =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span>
-<span id="cb35-259"><a href="#cb35-259"></a>)</span>
-<span id="cb35-260"><a href="#cb35-260"></a></span>
-<span id="cb35-261"><a href="#cb35-261"></a><span class="co"># Use pmap_chr() to apply str_sub() to each row</span></span>
-<span id="cb35-262"><a href="#cb35-262"></a><span class="fu">pmap_chr</span>(varied_args, str_sub)</span>
-<span id="cb35-263"><a href="#cb35-263"></a><span class="co"># Define the fixed string</span></span>
-<span id="cb35-264"><a href="#cb35-264"></a>my_string <span class="ot">&lt;-</span> <span class="st">"Learning pmap is great!"</span></span>
-<span id="cb35-265"><a href="#cb35-265"></a></span>
-<span id="cb35-266"><a href="#cb35-266"></a><span class="co"># Create a tibble with just the arguments that change</span></span>
-<span id="cb35-267"><a href="#cb35-267"></a>fixed_string_args <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb35-268"><a href="#cb35-268"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">18</span>),</span>
-<span id="cb35-269"><a href="#cb35-269"></a>  <span class="at">end   =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">23</span>)</span>
-<span id="cb35-270"><a href="#cb35-270"></a>)</span>
+<span id="cb35-240"><a href="#cb35-240"></a><span class="ss">- </span>Use different arguments for <span class="in">`string`</span>, <span class="in">`start`</span>, and <span class="in">`end`</span></span>
+<span id="cb35-241"><a href="#cb35-241"></a><span class="ss">- </span>Use different arguments for <span class="in">`start`</span> and <span class="in">`end`</span> but a fixed <span class="in">`string`</span></span>
+<span id="cb35-242"><a href="#cb35-242"></a></span>
+<span id="cb35-245"><a href="#cb35-245"></a><span class="in">```{r}</span></span>
+<span id="cb35-246"><a href="#cb35-246"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb35-247"><a href="#cb35-247"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb35-248"><a href="#cb35-248"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb35-249"><a href="#cb35-249"></a></span>
+<span id="cb35-250"><a href="#cb35-250"></a><span class="co"># Create a tibble with varying arguments</span></span>
+<span id="cb35-251"><a href="#cb35-251"></a>varied_args <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb35-252"><a href="#cb35-252"></a>  <span class="at">string =</span> <span class="fu">c</span>(<span class="st">"R-programming"</span>, <span class="st">"is-fun"</span>, <span class="st">"tidyverse"</span>),</span>
+<span id="cb35-253"><a href="#cb35-253"></a>  <span class="at">start  =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">6</span>),</span>
+<span id="cb35-254"><a href="#cb35-254"></a>  <span class="at">end    =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">2</span>, <span class="dv">9</span>)</span>
+<span id="cb35-255"><a href="#cb35-255"></a>)</span>
+<span id="cb35-256"><a href="#cb35-256"></a></span>
+<span id="cb35-257"><a href="#cb35-257"></a><span class="co"># Use pmap_chr() to apply str_sub() to each row</span></span>
+<span id="cb35-258"><a href="#cb35-258"></a><span class="fu">pmap_chr</span>(varied_args, str_sub)</span>
+<span id="cb35-259"><a href="#cb35-259"></a><span class="co"># Define the fixed string</span></span>
+<span id="cb35-260"><a href="#cb35-260"></a>my_string <span class="ot">&lt;-</span> <span class="st">"Learning pmap is great!"</span></span>
+<span id="cb35-261"><a href="#cb35-261"></a></span>
+<span id="cb35-262"><a href="#cb35-262"></a><span class="co"># Create a tibble with just the arguments that change</span></span>
+<span id="cb35-263"><a href="#cb35-263"></a>fixed_string_args <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb35-264"><a href="#cb35-264"></a>  <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">18</span>),</span>
+<span id="cb35-265"><a href="#cb35-265"></a>  <span class="at">end   =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">13</span>, <span class="dv">23</span>)</span>
+<span id="cb35-266"><a href="#cb35-266"></a>)</span>
+<span id="cb35-267"><a href="#cb35-267"></a></span>
+<span id="cb35-268"><a href="#cb35-268"></a><span class="co"># Pass the fixed string as an additional argument to pmap_chr()</span></span>
+<span id="cb35-269"><a href="#cb35-269"></a><span class="fu">pmap_chr</span>(fixed_string_args, <span class="at">.f =</span> str_sub, <span class="at">string =</span> my_string)</span>
+<span id="cb35-270"><a href="#cb35-270"></a><span class="in">```</span></span>
 <span id="cb35-271"><a href="#cb35-271"></a></span>
-<span id="cb35-272"><a href="#cb35-272"></a><span class="co"># Pass the fixed string as an additional argument to pmap_chr()</span></span>
-<span id="cb35-273"><a href="#cb35-273"></a><span class="fu">pmap_chr</span>(fixed_string_args, <span class="at">.f =</span> str_sub, <span class="at">string =</span> my_string)</span>
-<span id="cb35-274"><a href="#cb35-274"></a><span class="in">```</span></span>
+<span id="cb35-272"><a href="#cb35-272"></a><span class="ss">2. </span>Last class we worked on an extended exercise where our goal was to write a series of functions and a <span class="in">`for`</span> loop to repeat linear model fitting under different "settings" (removal of outliers, model formula choice). </span>
+<span id="cb35-273"><a href="#cb35-273"></a></span>
+<span id="cb35-274"><a href="#cb35-274"></a>Repeat this exercise using <span class="in">`pmap()`</span>.</span>
 <span id="cb35-275"><a href="#cb35-275"></a></span>
-<span id="cb35-276"><a href="#cb35-276"></a><span class="ss">2. </span>Last class we worked on an extended exercise where our goal was to write a series of functions and a <span class="in">`for`</span> loop to repeat linear model fitting under different "settings" (removal of outliers, model formula choice). </span>
-<span id="cb35-277"><a href="#cb35-277"></a></span>
-<span id="cb35-278"><a href="#cb35-278"></a>Repeat this exercise using <span class="in">`pmap()`</span>.</span>
+<span id="cb35-276"><a href="#cb35-276"></a><span class="ss">- </span>You'll need to use the <span class="in">`df_arg_combos`</span> object, your <span class="in">`remove_outliers()`</span> function, and your <span class="in">`fit_model()`</span> function.</span>
+<span id="cb35-277"><a href="#cb35-277"></a><span class="ss">- </span>Review the solutions below for the necessary parts and make sure you understand each part. </span>
+<span id="cb35-278"><a href="#cb35-278"></a><span class="ss">- </span>Then, try to put it all together using <span class="in">`pmap()`</span>.</span>
 <span id="cb35-279"><a href="#cb35-279"></a></span>
-<span id="cb35-280"><a href="#cb35-280"></a><span class="ss">- </span>You'll need to use the <span class="in">`df_arg_combos`</span> object, your <span class="in">`remove_outliers()`</span> function, and your <span class="in">`fit_model()`</span> function.</span>
-<span id="cb35-281"><a href="#cb35-281"></a><span class="ss">- </span>Review the solutions below for the necessary parts and make sure you understand each part. </span>
-<span id="cb35-282"><a href="#cb35-282"></a><span class="ss">- </span>Then, try to put it all together using <span class="in">`pmap()`</span>.</span>
-<span id="cb35-283"><a href="#cb35-283"></a></span>
-<span id="cb35-286"><a href="#cb35-286"></a><span class="in">```{r}</span></span>
-<span id="cb35-287"><a href="#cb35-287"></a>xs <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> <span class="fu">select</span>(carat, cut, clarity, color) <span class="sc">|&gt;</span> <span class="fu">names</span>()</span>
-<span id="cb35-288"><a href="#cb35-288"></a></span>
-<span id="cb35-289"><a href="#cb35-289"></a></span>
-<span id="cb35-290"><a href="#cb35-290"></a>df_arg_combos <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
-<span id="cb35-291"><a href="#cb35-291"></a>    <span class="at">mod_formula =</span> <span class="fu">str_c</span>(<span class="st">"price ~ "</span>, <span class="fu">map_chr</span>(<span class="fu">seq_along</span>(xs), <span class="sc">~</span> <span class="fu">str_c</span>(xs[<span class="dv">1</span><span class="sc">:</span>.x], <span class="at">collapse =</span> <span class="st">" + "</span>)) ),</span>
-<span id="cb35-292"><a href="#cb35-292"></a>    <span class="at">remove_outliers =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb35-293"><a href="#cb35-293"></a>)</span>
-<span id="cb35-294"><a href="#cb35-294"></a>df_arg_combos</span>
-<span id="cb35-295"><a href="#cb35-295"></a></span>
-<span id="cb35-296"><a href="#cb35-296"></a></span>
-<span id="cb35-297"><a href="#cb35-297"></a>remove_outliers <span class="ot">&lt;-</span> <span class="cf">function</span>(data, what_var, sd_thresh) {</span>
-<span id="cb35-298"><a href="#cb35-298"></a>    data <span class="sc">|&gt;</span> </span>
-<span id="cb35-299"><a href="#cb35-299"></a>        <span class="fu">mutate</span>(<span class="at">zscore =</span> ({{ what_var }} <span class="sc">-</span> <span class="fu">mean</span>({{ what_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">/</span><span class="fu">sd</span>({{ what_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb35-300"><a href="#cb35-300"></a>        <span class="fu">filter</span>(zscore <span class="sc">&lt;=</span> sd_thresh)</span>
-<span id="cb35-301"><a href="#cb35-301"></a>}</span>
-<span id="cb35-302"><a href="#cb35-302"></a></span>
-<span id="cb35-303"><a href="#cb35-303"></a>fit_model <span class="ot">&lt;-</span> <span class="cf">function</span>(data, mod_formula, remove_outliers) {</span>
-<span id="cb35-304"><a href="#cb35-304"></a>    <span class="cf">if</span> (remove_outliers) {</span>
-<span id="cb35-305"><a href="#cb35-305"></a>        data_clean <span class="ot">&lt;-</span> <span class="fu">remove_outliers</span>(data, <span class="at">what_var =</span> carat, <span class="at">sd_thresh =</span> <span class="dv">3</span>)</span>
-<span id="cb35-306"><a href="#cb35-306"></a>    } <span class="cf">else</span> {</span>
-<span id="cb35-307"><a href="#cb35-307"></a>        data_clean <span class="ot">&lt;-</span> data</span>
-<span id="cb35-308"><a href="#cb35-308"></a>    }</span>
-<span id="cb35-309"><a href="#cb35-309"></a>    </span>
-<span id="cb35-310"><a href="#cb35-310"></a>    <span class="fu">lm</span>(mod_formula, <span class="at">data =</span> data_clean)</span>
-<span id="cb35-311"><a href="#cb35-311"></a>}</span>
-<span id="cb35-312"><a href="#cb35-312"></a></span>
-<span id="cb35-313"><a href="#cb35-313"></a><span class="co"># use pmap()</span></span>
-<span id="cb35-314"><a href="#cb35-314"></a><span class="co"># Use pmap to create a list-column of models</span></span>
-<span id="cb35-315"><a href="#cb35-315"></a>df_models <span class="ot">&lt;-</span> df_arg_combos <span class="sc">|&gt;</span> </span>
-<span id="cb35-316"><a href="#cb35-316"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb35-317"><a href="#cb35-317"></a>    <span class="at">model =</span> <span class="fu">pmap</span>(</span>
-<span id="cb35-318"><a href="#cb35-318"></a></span>
-<span id="cb35-319"><a href="#cb35-319"></a>      <span class="at">.l =</span> <span class="fu">list</span>(</span>
-<span id="cb35-320"><a href="#cb35-320"></a>        <span class="at">mod_formula =</span> mod_formula,</span>
-<span id="cb35-321"><a href="#cb35-321"></a>        <span class="at">remove_outliers =</span> remove_outliers</span>
-<span id="cb35-322"><a href="#cb35-322"></a>      ),</span>
-<span id="cb35-323"><a href="#cb35-323"></a>      <span class="at">.f =</span> fit_model,</span>
-<span id="cb35-324"><a href="#cb35-324"></a>      <span class="at">data =</span> diamonds</span>
-<span id="cb35-325"><a href="#cb35-325"></a>    )</span>
-<span id="cb35-326"><a href="#cb35-326"></a>  )</span>
+<span id="cb35-282"><a href="#cb35-282"></a><span class="in">```{r}</span></span>
+<span id="cb35-283"><a href="#cb35-283"></a>xs <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> <span class="fu">select</span>(carat, cut, clarity, color) <span class="sc">|&gt;</span> <span class="fu">names</span>()</span>
+<span id="cb35-284"><a href="#cb35-284"></a></span>
+<span id="cb35-285"><a href="#cb35-285"></a></span>
+<span id="cb35-286"><a href="#cb35-286"></a>df_arg_combos <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
+<span id="cb35-287"><a href="#cb35-287"></a>    <span class="at">mod_formula =</span> <span class="fu">str_c</span>(<span class="st">"price ~ "</span>, <span class="fu">map_chr</span>(<span class="fu">seq_along</span>(xs), <span class="sc">~</span> <span class="fu">str_c</span>(xs[<span class="dv">1</span><span class="sc">:</span>.x], <span class="at">collapse =</span> <span class="st">" + "</span>)) ),</span>
+<span id="cb35-288"><a href="#cb35-288"></a>    <span class="at">remove_outliers =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb35-289"><a href="#cb35-289"></a>)</span>
+<span id="cb35-290"><a href="#cb35-290"></a>df_arg_combos</span>
+<span id="cb35-291"><a href="#cb35-291"></a></span>
+<span id="cb35-292"><a href="#cb35-292"></a></span>
+<span id="cb35-293"><a href="#cb35-293"></a>remove_outliers <span class="ot">&lt;-</span> <span class="cf">function</span>(data, what_var, sd_thresh) {</span>
+<span id="cb35-294"><a href="#cb35-294"></a>    data <span class="sc">|&gt;</span> </span>
+<span id="cb35-295"><a href="#cb35-295"></a>        <span class="fu">mutate</span>(<span class="at">zscore =</span> ({{ what_var }} <span class="sc">-</span> <span class="fu">mean</span>({{ what_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">/</span><span class="fu">sd</span>({{ what_var }}, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-296"><a href="#cb35-296"></a>        <span class="fu">filter</span>(zscore <span class="sc">&lt;=</span> sd_thresh)</span>
+<span id="cb35-297"><a href="#cb35-297"></a>}</span>
+<span id="cb35-298"><a href="#cb35-298"></a></span>
+<span id="cb35-299"><a href="#cb35-299"></a>fit_model <span class="ot">&lt;-</span> <span class="cf">function</span>(data, mod_formula, remove_outliers) {</span>
+<span id="cb35-300"><a href="#cb35-300"></a>    <span class="cf">if</span> (remove_outliers) {</span>
+<span id="cb35-301"><a href="#cb35-301"></a>        data_clean <span class="ot">&lt;-</span> <span class="fu">remove_outliers</span>(data, <span class="at">what_var =</span> carat, <span class="at">sd_thresh =</span> <span class="dv">3</span>)</span>
+<span id="cb35-302"><a href="#cb35-302"></a>    } <span class="cf">else</span> {</span>
+<span id="cb35-303"><a href="#cb35-303"></a>        data_clean <span class="ot">&lt;-</span> data</span>
+<span id="cb35-304"><a href="#cb35-304"></a>    }</span>
+<span id="cb35-305"><a href="#cb35-305"></a>    </span>
+<span id="cb35-306"><a href="#cb35-306"></a>    <span class="fu">lm</span>(mod_formula, <span class="at">data =</span> data_clean)</span>
+<span id="cb35-307"><a href="#cb35-307"></a>}</span>
+<span id="cb35-308"><a href="#cb35-308"></a></span>
+<span id="cb35-309"><a href="#cb35-309"></a><span class="co"># use pmap()</span></span>
+<span id="cb35-310"><a href="#cb35-310"></a><span class="co"># Use pmap to create a list-column of models</span></span>
+<span id="cb35-311"><a href="#cb35-311"></a>df_models <span class="ot">&lt;-</span> df_arg_combos <span class="sc">|&gt;</span> </span>
+<span id="cb35-312"><a href="#cb35-312"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb35-313"><a href="#cb35-313"></a>    <span class="at">model =</span> <span class="fu">pmap</span>(</span>
+<span id="cb35-314"><a href="#cb35-314"></a></span>
+<span id="cb35-315"><a href="#cb35-315"></a>      <span class="at">.l =</span> <span class="fu">list</span>(</span>
+<span id="cb35-316"><a href="#cb35-316"></a>        <span class="at">mod_formula =</span> mod_formula,</span>
+<span id="cb35-317"><a href="#cb35-317"></a>        <span class="at">remove_outliers =</span> remove_outliers</span>
+<span id="cb35-318"><a href="#cb35-318"></a>      ),</span>
+<span id="cb35-319"><a href="#cb35-319"></a>      <span class="at">.f =</span> fit_model,</span>
+<span id="cb35-320"><a href="#cb35-320"></a>      <span class="at">data =</span> diamonds</span>
+<span id="cb35-321"><a href="#cb35-321"></a>    )</span>
+<span id="cb35-322"><a href="#cb35-322"></a>  )</span>
+<span id="cb35-323"><a href="#cb35-323"></a></span>
+<span id="cb35-324"><a href="#cb35-324"></a><span class="co"># View the resulting tibble</span></span>
+<span id="cb35-325"><a href="#cb35-325"></a>df_models</span>
+<span id="cb35-326"><a href="#cb35-326"></a></span>
 <span id="cb35-327"><a href="#cb35-327"></a></span>
-<span id="cb35-328"><a href="#cb35-328"></a><span class="co"># View the resulting tibble</span></span>
-<span id="cb35-329"><a href="#cb35-329"></a>df_models</span>
+<span id="cb35-328"><a href="#cb35-328"></a></span>
+<span id="cb35-329"><a href="#cb35-329"></a><span class="in">```</span></span>
 <span id="cb35-330"><a href="#cb35-330"></a></span>
-<span id="cb35-331"><a href="#cb35-331"></a></span>
+<span id="cb35-331"><a href="#cb35-331"></a><span class="fu">## Iteration with `walk` </span></span>
 <span id="cb35-332"><a href="#cb35-332"></a></span>
-<span id="cb35-333"><a href="#cb35-333"></a><span class="in">```</span></span>
-<span id="cb35-334"><a href="#cb35-334"></a></span>
-<span id="cb35-335"><a href="#cb35-335"></a><span class="fu">## Iteration with `walk` </span></span>
-<span id="cb35-336"><a href="#cb35-336"></a></span>
+<span id="cb35-333"><a href="#cb35-333"></a></span>
+<span id="cb35-334"><a href="#cb35-334"></a>If we don't care about saving an output for each iteration, we can use the family of <span class="in">`walk()`</span> functions (<span class="in">`walk`</span>, <span class="in">`walk2`</span>, and <span class="in">`pwalk`</span>) to apply a function to each element of a list or vector with no output. </span>
+<span id="cb35-335"><a href="#cb35-335"></a></span>
+<span id="cb35-336"><a href="#cb35-336"></a>Let's say, we wanted to visualize the relationship between <span class="in">`carat`</span> and <span class="in">`price`</span> by clarity. </span>
 <span id="cb35-337"><a href="#cb35-337"></a></span>
-<span id="cb35-338"><a href="#cb35-338"></a>If we don't care about saving an output for each iteration, we can use the family of <span class="in">`walk()`</span> functions (<span class="in">`walk`</span>, <span class="in">`walk2`</span>, and <span class="in">`pwalk`</span>) to apply a function to each element of a list or vector with no output. </span>
+<span id="cb35-338"><a href="#cb35-338"></a>If we wanted a fully stratified (fully separated) analysis, we could create one visualization per clarity category and save it separately.</span>
 <span id="cb35-339"><a href="#cb35-339"></a></span>
-<span id="cb35-340"><a href="#cb35-340"></a>Let's say, we wanted to visualize the relationship between <span class="in">`carat`</span> and <span class="in">`price`</span> by clarity. </span>
-<span id="cb35-341"><a href="#cb35-341"></a></span>
-<span id="cb35-342"><a href="#cb35-342"></a>If we wanted a fully stratified (fully separated) analysis, we could create one visualization per clarity category and save it separately.</span>
-<span id="cb35-343"><a href="#cb35-343"></a></span>
-<span id="cb35-344"><a href="#cb35-344"></a></span>
-<span id="cb35-345"><a href="#cb35-345"></a>First, let's create separate datasets that are still contained in one tibble.</span>
-<span id="cb35-346"><a href="#cb35-346"></a></span>
-<span id="cb35-349"><a href="#cb35-349"></a><span class="in">```{r}</span></span>
-<span id="cb35-350"><a href="#cb35-350"></a><span class="co"># Let's create separate datasets within one tibble</span></span>
-<span id="cb35-351"><a href="#cb35-351"></a>by_clarity <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> </span>
-<span id="cb35-352"><a href="#cb35-352"></a>  <span class="fu">group_nest</span>(clarity)</span>
-<span id="cb35-353"><a href="#cb35-353"></a></span>
-<span id="cb35-354"><a href="#cb35-354"></a>by_clarity</span>
-<span id="cb35-355"><a href="#cb35-355"></a><span class="in">```</span></span>
-<span id="cb35-356"><a href="#cb35-356"></a></span>
-<span id="cb35-359"><a href="#cb35-359"></a><span class="in">```{r}</span></span>
-<span id="cb35-360"><a href="#cb35-360"></a><span class="co"># Create a variable with a image path</span></span>
-<span id="cb35-361"><a href="#cb35-361"></a>by_clarity <span class="ot">&lt;-</span> by_clarity <span class="sc">|&gt;</span> </span>
-<span id="cb35-362"><a href="#cb35-362"></a>  <span class="fu">mutate</span>(<span class="at">path =</span> <span class="fu">str_glue</span>(<span class="st">"diamonds-{clarity}.png"</span>))</span>
-<span id="cb35-363"><a href="#cb35-363"></a></span>
-<span id="cb35-364"><a href="#cb35-364"></a>by_clarity</span>
-<span id="cb35-365"><a href="#cb35-365"></a><span class="in">```</span></span>
-<span id="cb35-366"><a href="#cb35-366"></a></span>
-<span id="cb35-369"><a href="#cb35-369"></a><span class="in">```{r}</span></span>
-<span id="cb35-370"><a href="#cb35-370"></a><span class="co"># plot for making a scatterplot</span></span>
-<span id="cb35-371"><a href="#cb35-371"></a>carat_scatter <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
-<span id="cb35-372"><a href="#cb35-372"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> <span class="fu">geom_point</span>()  </span>
-<span id="cb35-373"><a href="#cb35-373"></a>}</span>
-<span id="cb35-374"><a href="#cb35-374"></a></span>
-<span id="cb35-375"><a href="#cb35-375"></a><span class="co"># Create a "variable" with each plots</span></span>
-<span id="cb35-376"><a href="#cb35-376"></a>by_clarity <span class="ot">&lt;-</span> by_clarity <span class="sc">|&gt;</span> </span>
-<span id="cb35-377"><a href="#cb35-377"></a>  <span class="fu">mutate</span>(<span class="at">plot =</span> <span class="fu">map</span>(data, carat_scatter)) <span class="co"># iterate over data to create ggplot output</span></span>
-<span id="cb35-378"><a href="#cb35-378"></a><span class="in">```</span></span>
-<span id="cb35-379"><a href="#cb35-379"></a></span>
-<span id="cb35-382"><a href="#cb35-382"></a><span class="in">```{r}</span></span>
-<span id="cb35-383"><a href="#cb35-383"></a><span class="co"># Iterate over paths and plots to save the export images</span></span>
-<span id="cb35-384"><a href="#cb35-384"></a><span class="fu">walk2</span>( </span>
-<span id="cb35-385"><a href="#cb35-385"></a>  by_clarity<span class="sc">$</span>path,</span>
-<span id="cb35-386"><a href="#cb35-386"></a>  by_clarity<span class="sc">$</span>plot,</span>
-<span id="cb35-387"><a href="#cb35-387"></a>  <span class="cf">function</span>(path, plot){ <span class="fu">ggsave</span>(path, plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">6</span>)}</span>
-<span id="cb35-388"><a href="#cb35-388"></a>)</span>
-<span id="cb35-389"><a href="#cb35-389"></a></span>
-<span id="cb35-390"><a href="#cb35-390"></a><span class="in">```</span></span>
-<span id="cb35-391"><a href="#cb35-391"></a></span>
+<span id="cb35-340"><a href="#cb35-340"></a></span>
+<span id="cb35-341"><a href="#cb35-341"></a>First, let's create separate datasets that are still contained in one tibble.</span>
+<span id="cb35-342"><a href="#cb35-342"></a></span>
+<span id="cb35-345"><a href="#cb35-345"></a><span class="in">```{r}</span></span>
+<span id="cb35-346"><a href="#cb35-346"></a><span class="co"># Let's create separate datasets within one tibble</span></span>
+<span id="cb35-347"><a href="#cb35-347"></a>by_clarity <span class="ot">&lt;-</span> diamonds <span class="sc">|&gt;</span> </span>
+<span id="cb35-348"><a href="#cb35-348"></a>  <span class="fu">group_nest</span>(clarity)</span>
+<span id="cb35-349"><a href="#cb35-349"></a></span>
+<span id="cb35-350"><a href="#cb35-350"></a>by_clarity</span>
+<span id="cb35-351"><a href="#cb35-351"></a><span class="in">```</span></span>
+<span id="cb35-352"><a href="#cb35-352"></a></span>
+<span id="cb35-355"><a href="#cb35-355"></a><span class="in">```{r}</span></span>
+<span id="cb35-356"><a href="#cb35-356"></a><span class="co"># Create a variable with a image path</span></span>
+<span id="cb35-357"><a href="#cb35-357"></a>by_clarity <span class="ot">&lt;-</span> by_clarity <span class="sc">|&gt;</span> </span>
+<span id="cb35-358"><a href="#cb35-358"></a>  <span class="fu">mutate</span>(<span class="at">path =</span> <span class="fu">str_glue</span>(<span class="st">"diamonds-{clarity}.png"</span>))</span>
+<span id="cb35-359"><a href="#cb35-359"></a></span>
+<span id="cb35-360"><a href="#cb35-360"></a>by_clarity</span>
+<span id="cb35-361"><a href="#cb35-361"></a><span class="in">```</span></span>
+<span id="cb35-362"><a href="#cb35-362"></a></span>
+<span id="cb35-365"><a href="#cb35-365"></a><span class="in">```{r}</span></span>
+<span id="cb35-366"><a href="#cb35-366"></a><span class="co"># plot for making a scatterplot</span></span>
+<span id="cb35-367"><a href="#cb35-367"></a>carat_scatter <span class="ot">&lt;-</span> <span class="cf">function</span>(df) {</span>
+<span id="cb35-368"><a href="#cb35-368"></a>  <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span> <span class="fu">geom_point</span>()  </span>
+<span id="cb35-369"><a href="#cb35-369"></a>}</span>
+<span id="cb35-370"><a href="#cb35-370"></a></span>
+<span id="cb35-371"><a href="#cb35-371"></a><span class="co"># Create a "variable" with each plots</span></span>
+<span id="cb35-372"><a href="#cb35-372"></a>by_clarity <span class="ot">&lt;-</span> by_clarity <span class="sc">|&gt;</span> </span>
+<span id="cb35-373"><a href="#cb35-373"></a>  <span class="fu">mutate</span>(<span class="at">plot =</span> <span class="fu">map</span>(data, carat_scatter)) <span class="co"># iterate over data to create ggplot output</span></span>
+<span id="cb35-374"><a href="#cb35-374"></a><span class="in">```</span></span>
+<span id="cb35-375"><a href="#cb35-375"></a></span>
+<span id="cb35-378"><a href="#cb35-378"></a><span class="in">```{r}</span></span>
+<span id="cb35-379"><a href="#cb35-379"></a><span class="co"># Iterate over paths and plots to save the export images</span></span>
+<span id="cb35-380"><a href="#cb35-380"></a><span class="fu">walk2</span>( </span>
+<span id="cb35-381"><a href="#cb35-381"></a>  by_clarity<span class="sc">$</span>path,</span>
+<span id="cb35-382"><a href="#cb35-382"></a>  by_clarity<span class="sc">$</span>plot,</span>
+<span id="cb35-383"><a href="#cb35-383"></a>  <span class="cf">function</span>(path, plot){ <span class="fu">ggsave</span>(path, plot, <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">6</span>)}</span>
+<span id="cb35-384"><a href="#cb35-384"></a>)</span>
+<span id="cb35-385"><a href="#cb35-385"></a></span>
+<span id="cb35-386"><a href="#cb35-386"></a><span class="in">```</span></span>
+<span id="cb35-387"><a href="#cb35-387"></a></span>
+<span id="cb35-388"><a href="#cb35-388"></a></span>
+<span id="cb35-389"><a href="#cb35-389"></a><span class="fu">## Additional Resources </span></span>
+<span id="cb35-390"><a href="#cb35-390"></a></span>
+<span id="cb35-391"><a href="#cb35-391"></a>If you are interested in having a deeper understanding of the <span class="in">`purrr`</span> package, I recommend you check out:</span>
 <span id="cb35-392"><a href="#cb35-392"></a></span>
-<span id="cb35-393"><a href="#cb35-393"></a><span class="fu">## Additional Resources </span></span>
-<span id="cb35-394"><a href="#cb35-394"></a></span>
-<span id="cb35-395"><a href="#cb35-395"></a>If you are interested in having a deeper understanding of the <span class="in">`purrr`</span> package, I recommend you check out:</span>
-<span id="cb35-396"><a href="#cb35-396"></a></span>
-<span id="cb35-397"><a href="#cb35-397"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Functionals Chapter in Advanced R</span><span class="co">](https://adv-r.hadley.nz/functionals.html)</span> by Hadley Wickham</span>
-<span id="cb35-398"><a href="#cb35-398"></a><span class="fu">## Done!</span></span>
-<span id="cb35-399"><a href="#cb35-399"></a></span>
-<span id="cb35-400"><a href="#cb35-400"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
+<span id="cb35-393"><a href="#cb35-393"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Functionals Chapter in Advanced R</span><span class="co">](https://adv-r.hadley.nz/functionals.html)</span> by Hadley Wickham</span>
+<span id="cb35-394"><a href="#cb35-394"></a><span class="fu">## Done!</span></span>
+<span id="cb35-395"><a href="#cb35-395"></a></span>
+<span id="cb35-396"><a href="#cb35-396"></a><span class="ss">- </span>Check the ICA Instructions for how to (a) push your code to GitHub and (b) update your portfolio website</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
