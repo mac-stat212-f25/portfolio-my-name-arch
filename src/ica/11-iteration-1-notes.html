@@ -445,6 +445,16 @@ cookieconsent.run({
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../src/ica/14-apis-2-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">14 APIs P2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/ica/15-scraping-notes (3).html" class="sidebar-item-text sidebar-link"><span class="chapter-title">15 Web scraping</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../src/ica/16-databases-notes.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">16 Databases and SQL</span></a>
   </div>
 </li>
@@ -730,7 +740,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                             min median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 for (i in 1:1e+05) { x &lt;- c(x, i) }  28.8s  28.8s    0.0347    18.6GB     47.2</code></pre>
+1 for (i in 1:1e+05) { x &lt;- c(x, i) }  29.8s  29.8s    0.0335    18.6GB     45.6</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Example 2: Using a storage container!</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="co">#Notice median (time to run), mem_alloc (how much memory you are using), and gc (garbage collection)</span></span>
@@ -744,7 +754,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                            min  median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                       &lt;bch:tm&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 for (i in 1:1e+05) { x[i] &lt;- i }   3.67ms   3.8ms      258.     402KB     2.03</code></pre>
+1 for (i in 1:1e+05) { x[i] &lt;- i }   3.67ms  3.82ms      253.     402KB     2.02</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># Example 3: Vectorized function</span></span>
 <span id="cb33-2"><a href="#cb33-2"></a><span class="co">#Notice median (time to run), mem_alloc (how much memory you are using), and gc (garbage collection)</span></span>
@@ -755,7 +765,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                      min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                 &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 x &lt;- seq(1, 1e+05, by = 1)    409µs    540µs     1784.    1.91MB     69.2</code></pre>
+1 x &lt;- seq(1, 1e+05, by = 1)    414µs    539µs     1795.    1.91MB     69.3</code></pre>
 </div>
 </div>
 </section></section><section id="exercises" class="level2"><h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -1048,20 +1058,20 @@ Coefficients:
 <pre><code>$mean
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x10f925230&gt;
+&lt;bytecode: 0x11a440430&gt;
 &lt;environment: namespace:base&gt;
 
 $med
 function (x, na.rm = FALSE, ...) 
 UseMethod("median")
-&lt;bytecode: 0x139f4d318&gt;
+&lt;bytecode: 0x11a1a7918&gt;
 &lt;environment: namespace:stats&gt;
 
 $sd
 function (x, na.rm = FALSE) 
 sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
     na.rm = na.rm))
-&lt;bytecode: 0x12cda75d8&gt;
+&lt;bytecode: 0x10a720440&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">str</span>(list_of_fcts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1410,7 +1420,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. ..- attr(*, "names")= chr [1:2] "price" "carat"
@@ -1427,7 +1437,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. .. ..- attr(*, "names")= chr [1:2] "price" "carat"
@@ -1467,7 +1477,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. ..- attr(*, "names")= chr [1:2] "price" "carat"
@@ -1484,7 +1494,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. .. ..- attr(*, "names")= chr [1:2] "price" "carat"
@@ -1529,7 +1539,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int [1:2] 1 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat, cut)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:3] "numeric" "numeric" "ordered"
   .. .. .. ..- attr(*, "names")= chr [1:3] "price" "carat" "cut"
@@ -1547,7 +1557,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int [1:2] 1 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat, cut)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:3] "numeric" "numeric" "ordered"
   .. .. .. .. ..- attr(*, "names")= chr [1:3] "price" "carat" "cut"
@@ -1592,7 +1602,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int [1:2] 1 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat, cut)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:3] "numeric" "numeric" "ordered"
   .. .. .. ..- attr(*, "names")= chr [1:3] "price" "carat" "cut"
@@ -1610,7 +1620,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int [1:2] 1 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat, cut)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:3] "numeric" "numeric" "ordered"
   .. .. .. .. ..- attr(*, "names")= chr [1:3] "price" "carat" "cut"
@@ -1658,7 +1668,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int [1:3] 1 1 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "ordered" "ordered"
   .. .. .. ..- attr(*, "names")= chr [1:4] "price" "carat" "cut" "clarity"
@@ -1677,7 +1687,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int [1:3] 1 1 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "ordered" "ordered"
   .. .. .. .. ..- attr(*, "names")= chr [1:4] "price" "carat" "cut" "clarity"
@@ -1725,7 +1735,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int [1:3] 1 1 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "ordered" "ordered"
   .. .. .. ..- attr(*, "names")= chr [1:4] "price" "carat" "cut" "clarity"
@@ -1744,7 +1754,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int [1:3] 1 1 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:4] "numeric" "numeric" "ordered" "ordered"
   .. .. .. .. ..- attr(*, "names")= chr [1:4] "price" "carat" "cut" "clarity"
@@ -1795,7 +1805,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity, color)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "ordered" "ordered" ...
   .. .. .. ..- attr(*, "names")= chr [1:5] "price" "carat" "cut" "clarity" ...
@@ -1815,7 +1825,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity, color)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "ordered" "ordered" ...
   .. .. .. .. ..- attr(*, "names")= chr [1:5] "price" "carat" "cut" "clarity" ...
@@ -1866,7 +1876,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity, color)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "ordered" "ordered" ...
   .. .. .. ..- attr(*, "names")= chr [1:5] "price" "carat" "cut" "clarity" ...
@@ -1886,7 +1896,7 @@ F-statistic: 3.041e+05 on 1 and 53938 DF,  p-value: &lt; 2.2e-16</code></pre>
   .. .. .. ..- attr(*, "order")= int [1:4] 1 1 1 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x11a34ea58&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x10ffa1970&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(price, carat, cut, clarity, color)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:5] "numeric" "numeric" "ordered" "ordered" ...
   .. .. .. .. ..- attr(*, "names")= chr [1:5] "price" "carat" "cut" "clarity" ...
